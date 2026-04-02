@@ -6,10 +6,17 @@ import { ArrowRight, Heart, BookOpen, Stethoscope, GraduationCap, Leaf, Play } f
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { urlForImage } from "@/sanity/lib/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Home() {
+interface HomeProps {
+  programs: any[];
+  featuredEvents: any[];
+  testimonials: any[];
+}
+
+export default function Home({ programs, featuredEvents, testimonials }: HomeProps) {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -263,55 +270,55 @@ export default function Home() {
             {/* BAE - Large Feature */}
             <div className="bento-item md:col-span-2 lg:col-span-2 row-span-2 bg-vmgef-ink text-white p-10 flex flex-col justify-between group overflow-hidden relative rounded-3xl">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-              <img src="/vmgef_pics/IMG-20251002-WA0039.jpg" alt="Entrepreneurship" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+              <img src={programs && programs.length > 0 && programs[0].image ? urlForImage(programs[0].image).url() : "/vmgef_pics/IMG-20251002-WA0039.jpg"} alt="Entrepreneurship" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
               <div className="relative z-20">
                 <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6">
                   <BookOpen size={24} className="text-white" />
                 </div>
               </div>
               <div className="relative z-20">
-                <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-3 block">14-Week Course</span>
-                <h3 className="font-serif text-3xl md:text-4xl mb-4">Building an Entrepreneur (BAE)</h3>
-                <p className="text-white/80 font-light max-w-md">Senior-high entrepreneurship course teaching business planning, culminating in a pitch competition with a GHS 10,000 grant.</p>
+                <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-3 block">{programs && programs.length > 0 ? programs[0].subtitle : "14-Week Course"}</span>
+                <h3 className="font-serif text-3xl md:text-4xl mb-4">{programs && programs.length > 0 ? programs[0].title : "Building an Entrepreneur (BAE)"}</h3>
+                <p className="text-white/80 font-light max-w-md">{programs && programs.length > 0 ? programs[0].description : "Senior-high entrepreneurship course teaching business planning, culminating in a pitch competition with a GHS 10,000 grant."}</p>
               </div>
             </div>
 
             {/* Confident Girls */}
-            <div className="bento-item md:col-span-1 lg:col-span-2 bg-[#F4F1ED] p-10 flex flex-col justify-between group hover:bg-vmgef-orange transition-colors duration-500 rounded-3xl">
+            <div className={`bento-item md:col-span-1 lg:col-span-2 ${programs && programs.length > 1 && programs[1].color ? programs[1].color : "bg-[#F4F1ED]"} p-10 flex flex-col justify-between group hover:bg-vmgef-orange transition-colors duration-500 rounded-3xl`}>
               <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
                 <Heart size={24} className="text-vmgef-orange" />
               </div>
               <div>
-                <span className="text-vmgef-ink-light group-hover:text-white/80 tracking-widest uppercase text-xs font-bold mb-3 block transition-colors">8-Week Series</span>
-                <h3 className="font-serif text-2xl text-vmgef-ink group-hover:text-white mb-3 transition-colors">Confident Girls, Bright Futures</h3>
-                <p className="text-vmgef-ink-light group-hover:text-white/90 font-light text-sm transition-colors">Junior-high empowerment covering self-confidence, integrity, and emotional growth.</p>
+                <span className="text-vmgef-ink-light group-hover:text-white/80 tracking-widest uppercase text-xs font-bold mb-3 block transition-colors">{programs && programs.length > 1 ? programs[1].subtitle : "8-Week Series"}</span>
+                <h3 className="font-serif text-2xl text-vmgef-ink group-hover:text-white mb-3 transition-colors">{programs && programs.length > 1 ? programs[1].title : "Confident Girls, Bright Futures"}</h3>
+                <p className="text-vmgef-ink-light group-hover:text-white/90 font-light text-sm transition-colors">{programs && programs.length > 1 ? programs[1].description : "Junior-high empowerment covering self-confidence, integrity, and emotional growth."}</p>
               </div>
             </div>
 
             {/* Healthcare */}
-            <div className="bento-item md:col-span-1 lg:col-span-1 bg-white border border-gray-200 p-8 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl">
+            <div className={`bento-item md:col-span-1 lg:col-span-1 ${programs && programs.length > 2 && programs[2].color ? programs[2].color : "bg-white"} border border-gray-200 p-8 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl`}>
               <Stethoscope size={32} className="text-vmgef-orange mb-6" />
               <div>
-                <h3 className="font-serif text-xl text-vmgef-ink mb-3">Healthcare Outreach</h3>
-                <p className="text-vmgef-ink-light font-light text-sm">Mpatase Clinic Equipment Drive. Outfitting a new 7-room rural clinic.</p>
+                <h3 className="font-serif text-xl text-vmgef-ink mb-3">{programs && programs.length > 2 ? programs[2].title : "Healthcare Outreach"}</h3>
+                <p className="text-vmgef-ink-light font-light text-sm">{programs && programs.length > 2 ? programs[2].description : "Mpatase Clinic Equipment Drive. Outfitting a new 7-room rural clinic."}</p>
               </div>
             </div>
 
             {/* STEM */}
-            <div className="bento-item md:col-span-1 lg:col-span-1 bg-white border border-gray-200 p-8 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl">
+            <div className={`bento-item md:col-span-1 lg:col-span-1 ${programs && programs.length > 3 && programs[3].color ? programs[3].color : "bg-white"} border border-gray-200 p-8 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl`}>
               <GraduationCap size={32} className="text-vmgef-orange mb-6" />
               <div>
-                <h3 className="font-serif text-xl text-vmgef-ink mb-3">STEM Scholarships</h3>
-                <p className="text-vmgef-ink-light font-light text-sm">4-year university scholarships for young women in science and tech.</p>
+                <h3 className="font-serif text-xl text-vmgef-ink mb-3">{programs && programs.length > 3 ? programs[3].title : "STEM Scholarships"}</h3>
+                <p className="text-vmgef-ink-light font-light text-sm">{programs && programs.length > 3 ? programs[3].description : "4-year university scholarships for young women in science and tech."}</p>
               </div>
             </div>
 
             {/* Urban Farming */}
-            <div className="bento-item md:col-span-1 lg:col-span-2 bg-[#E8EFE9] p-10 flex flex-col justify-between group relative overflow-hidden rounded-3xl">
+            <div className={`bento-item md:col-span-1 lg:col-span-2 ${programs && programs.length > 4 && programs[4].color ? programs[4].color : "bg-[#E8EFE9]"} p-10 flex flex-col justify-between group relative overflow-hidden rounded-3xl`}>
               <Leaf size={32} className="text-[#2D5A27] mb-6 relative z-10" />
               <div className="relative z-10">
-                <h3 className="font-serif text-2xl text-vmgef-ink mb-3">Urban Farming & Reforestation</h3>
-                <p className="text-vmgef-ink-light font-light text-sm max-w-sm">Teaching climate-smart agriculture and tree-planting through community classes.</p>
+                <h3 className="font-serif text-2xl text-vmgef-ink mb-3">{programs && programs.length > 4 ? programs[4].title : "Urban Farming & Reforestation"}</h3>
+                <p className="text-vmgef-ink-light font-light text-sm max-w-sm">{programs && programs.length > 4 ? programs[4].description : "Teaching climate-smart agriculture and tree-planting through community classes."}</p>
               </div>
               {/* Decorative leaf graphic */}
               <Leaf size={200} className="absolute -bottom-10 -right-10 text-[#2D5A27]/10 transform -rotate-12 group-hover:rotate-0 transition-transform duration-700" />
@@ -486,7 +493,7 @@ export default function Home() {
             <div className="fade-up group relative overflow-hidden rounded-3xl bg-vmgef-ink text-white">
               <div className="absolute inset-0 z-0">
                 <img 
-                  src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
+                  src={featuredEvents && featuredEvents.length > 0 && featuredEvents[0].image ? urlForImage(featuredEvents[0].image).url() : "/vmgef_pics/IMG-20251002-WA0052.jpg"} 
                   alt="Gala Event" 
                   className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
@@ -496,11 +503,11 @@ export default function Home() {
               <div className="relative z-10 p-10 h-full flex flex-col justify-end min-h-[400px]">
                 <div className="mb-6">
                   <span className="inline-block bg-vmgef-orange text-white text-xs font-bold tracking-widest uppercase px-4 py-2 mb-4 rounded-full">Featured</span>
-                  <h3 className="font-serif text-3xl md:text-4xl mb-2">2nd Annual Gala</h3>
-                  <p className="text-white/80 font-light">A night of celebration, fundraising, and community impact.</p>
+                  <h3 className="font-serif text-3xl md:text-4xl mb-2">{featuredEvents && featuredEvents.length > 0 ? featuredEvents[0].title : "2nd Annual Gala"}</h3>
+                  <p className="text-white/80 font-light">{featuredEvents && featuredEvents.length > 0 ? featuredEvents[0].description : "A night of celebration, fundraising, and community impact."}</p>
                 </div>
                 <div className="flex items-center justify-between border-t border-white/20 pt-6 mt-auto">
-                  <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">Accra, Ghana</div>
+                  <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">{featuredEvents && featuredEvents.length > 0 ? featuredEvents[0].location : "Accra, Ghana"}</div>
                   <Link href="/events" className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-vmgef-orange group-hover:border-vmgef-orange transition-colors">
                     <ArrowRight size={18} />
                   </Link>
@@ -513,11 +520,11 @@ export default function Home() {
               <div className="p-10 h-full flex flex-col min-h-[400px]">
                 <div className="mb-6">
                   <span className="inline-block border border-vmgef-ink/20 text-vmgef-ink-light text-xs font-bold tracking-widest uppercase px-4 py-2 mb-4 rounded-full">Community</span>
-                  <h3 className="font-serif text-3xl md:text-4xl mb-2">BAE Pitch Competition</h3>
-                  <p className="text-vmgef-ink-light font-light">Watch our high school entrepreneurs pitch their business plans for a GHS 10,000 grant.</p>
+                  <h3 className="font-serif text-3xl md:text-4xl mb-2">{featuredEvents && featuredEvents.length > 1 ? featuredEvents[1].title : "BAE Pitch Competition"}</h3>
+                  <p className="text-vmgef-ink-light font-light">{featuredEvents && featuredEvents.length > 1 ? featuredEvents[1].description : "Watch our high school entrepreneurs pitch their business plans for a GHS 10,000 grant."}</p>
                 </div>
                 <div className="flex items-center justify-between border-t border-vmgef-ink/10 pt-6 mt-auto">
-                  <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">Coming Soon</div>
+                  <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">{featuredEvents && featuredEvents.length > 1 && featuredEvents[1].date ? new Date(featuredEvents[1].date).toLocaleDateString() : "Coming Soon"}</div>
                   <Link href="/events" className="w-10 h-10 rounded-full border border-vmgef-ink/20 flex items-center justify-center group-hover:bg-vmgef-ink group-hover:text-white transition-colors">
                     <ArrowRight size={18} />
                   </Link>
@@ -543,15 +550,15 @@ export default function Home() {
               </svg>
             </div>
             <p className="font-serif text-2xl md:text-3xl text-vmgef-ink leading-relaxed mb-10">
-              "The BAE program didn't just teach me how to write a business plan; it taught me that my ideas have value. I now have the confidence to pursue my dreams and create jobs in my community."
+              "{testimonials && testimonials.length > 0 ? testimonials[0].quote : "The BAE program didn't just teach me how to write a business plan; it taught me that my ideas have value. I now have the confidence to pursue my dreams and create jobs in my community."}"
             </p>
             <div className="flex items-center justify-center gap-4">
               <div className="w-12 h-12 rounded-full bg-vmgef-ink/10 overflow-hidden">
-                <img src="/vmgef_pics/IMG-20251002-WA0040.jpg" alt="Student" className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
+                <img src={testimonials && testimonials.length > 0 && testimonials[0].image ? urlForImage(testimonials[0].image).url() : "/vmgef_pics/IMG-20251002-WA0040.jpg"} alt="Student" className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
               </div>
               <div className="text-left">
-                <div className="font-bold text-vmgef-ink text-sm uppercase tracking-widest">Ama Mensah</div>
-                <div className="text-vmgef-orange text-xs font-semibold tracking-wider uppercase">BAE Program Graduate</div>
+                <div className="font-bold text-vmgef-ink text-sm uppercase tracking-widest">{testimonials && testimonials.length > 0 ? testimonials[0].author : "Ama Mensah"}</div>
+                <div className="text-vmgef-orange text-xs font-semibold tracking-wider uppercase">{testimonials && testimonials.length > 0 ? testimonials[0].role : "BAE Program Graduate"}</div>
               </div>
             </div>
           </div>
