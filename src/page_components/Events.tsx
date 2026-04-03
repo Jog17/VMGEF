@@ -5,11 +5,19 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Calendar, MapPin, Clock, Ticket, Star } from "lucide-react";
+import { urlForImage } from "@/sanity/lib/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Events() {
+interface EventsProps {
+  events: any[];
+  featuredEvents: any[];
+}
+
+export default function Events({ events, featuredEvents }: EventsProps) {
   const container = useRef<HTMLDivElement>(null);
+
+  const featured = featuredEvents && featuredEvents.length > 0 ? featuredEvents[0] : null;
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -84,15 +92,15 @@ export default function Events() {
               <div className="inline-flex items-center gap-2 px-4 py-2 border border-vmgef-orange/30 rounded-full text-vmgef-orange text-xs tracking-widest uppercase font-bold mb-8">
                 <Star size={14} /> Upcoming Event
               </div>
-              <h2 className="font-serif text-5xl md:text-7xl mb-6">2nd Annual Gala</h2>
+              <h2 className="font-serif text-5xl md:text-7xl mb-6">{featured ? featured.title : "2nd Annual Gala"}</h2>
               <p className="text-2xl font-light text-white/80 mb-8 italic">
-                "Honoring Women Making an Impact in the Community"
+                "{featured ? featured.description : "Honoring Women Making an Impact in the Community"}"
               </p>
               
               <div className="space-y-6 mb-12">
                 <div className="flex items-center gap-4 text-white/80">
                   <Calendar className="text-vmgef-orange" size={24} />
-                  <span className="text-lg font-light">Sunday, March 9th, 2025</span>
+                  <span className="text-lg font-light">{featured && featured.date ? new Date(featured.date).toLocaleDateString() : "Sunday, March 9th, 2025"}</span>
                 </div>
                 <div className="flex items-center gap-4 text-white/80">
                   <Clock className="text-vmgef-orange" size={24} />
@@ -100,7 +108,7 @@ export default function Events() {
                 </div>
                 <div className="flex items-center gap-4 text-white/80">
                   <MapPin className="text-vmgef-orange" size={24} />
-                  <span className="text-lg font-light">Canis Majoris Center, Awoshie - Ghana</span>
+                  <span className="text-lg font-light">{featured ? featured.location : "Canis Majoris Center, Awoshie - Ghana"}</span>
                 </div>
               </div>
 

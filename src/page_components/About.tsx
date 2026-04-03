@@ -4,11 +4,18 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { urlForImage } from "@/sanity/lib/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function About() {
+interface AboutProps {
+  teamMembers: any[];
+}
+
+export default function About({ teamMembers }: AboutProps) {
   const container = useRef<HTMLDivElement>(null);
+  
+  const founder = teamMembers && teamMembers.length > 0 ? teamMembers[0] : null;
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -126,23 +133,25 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div className="fade-up md:col-span-5 h-[600px] overflow-hidden rounded-3xl">
               <img 
-                src="/vmgef_pics/IMG-20251002-WA0022.jpg" 
-                alt="Jahzara Agyemang" 
+                src={founder && founder.image ? urlForImage(founder.image).url() : "/vmgef_pics/IMG-20251002-WA0022.jpg"} 
+                alt={founder ? founder.name : "Jahzara Agyemang"} 
                 className="w-full h-full object-cover grayscale"
                 referrerPolicy="no-referrer"
               />
             </div>
             <div className="fade-up md:col-span-7 md:pl-12">
-              <h3 className="font-serif text-4xl text-vmgef-ink mb-2">Jahzara Agyemang, M.Ed.</h3>
-              <p className="text-vmgef-orange tracking-widest uppercase text-sm font-bold mb-8">Founder & Executive Director</p>
+              <h3 className="font-serif text-4xl text-vmgef-ink mb-2">{founder ? founder.name : "Jahzara Agyemang, M.Ed."}</h3>
+              <p className="text-vmgef-orange tracking-widest uppercase text-sm font-bold mb-8">{founder ? founder.role : "Founder & Executive Director"}</p>
               
               <div className="space-y-6 text-lg text-vmgef-ink-light font-light leading-relaxed mb-12">
                 <p>
-                  Jahzara (also known as Obaa Yaa Papabi) is a Philadelphia-raised, Ghana-based educator and entrepreneur. She has served as a professor and nonprofit director in both the US and Ghana.
+                  {founder ? founder.bio : "Jahzara (also known as Obaa Yaa Papabi) is a Philadelphia-raised, Ghana-based educator and entrepreneur. She has served as a professor and nonprofit director in both the US and Ghana."}
                 </p>
-                <p>
-                  Her biography highlights a lifetime of leadership in education and women's empowerment. Today, she leads VMGEF with a small, dedicated core team of 2-10 staff and volunteers headquartered in Weija, Accra.
-                </p>
+                {!founder && (
+                  <p>
+                    Her biography highlights a lifetime of leadership in education and women's empowerment. Today, she leads VMGEF with a small, dedicated core team of 2-10 staff and volunteers headquartered in Weija, Accra.
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-2 gap-8 border-t border-vmgef-ink/10 pt-8">

@@ -6,10 +6,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { BookOpen, Heart, Stethoscope, GraduationCap, Leaf, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { urlForImage } from "@/sanity/lib/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const programs = [
+const fallbackPrograms = [
   {
     id: "bae",
     title: "Building an Entrepreneur (BAE)",
@@ -62,8 +63,23 @@ const programs = [
   }
 ];
 
-export default function Programs() {
+interface ProgramsProps {
+  programs: any[];
+}
+
+export default function Programs({ programs }: ProgramsProps) {
   const container = useRef<HTMLDivElement>(null);
+  
+  const displayPrograms = programs && programs.length > 0 ? programs.map((p, i) => ({
+    id: p._id,
+    title: p.title,
+    subtitle: p.subtitle,
+    description: p.description,
+    icon: fallbackPrograms[i % fallbackPrograms.length].icon, // Keep fallback icons for now
+    image: p.image ? urlForImage(p.image).url() : fallbackPrograms[i % fallbackPrograms.length].image,
+    color: p.color || fallbackPrograms[i % fallbackPrograms.length].color,
+    textColor: p.textColor || fallbackPrograms[i % fallbackPrograms.length].textColor
+  })) : fallbackPrograms;
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
@@ -141,7 +157,7 @@ export default function Programs() {
 
       {/* PROGRAMS LIST */}
       <section className="pb-32">
-        {programs.map((prog, index) => {
+        {displayPrograms.map((prog, index) => {
           const isEven = index % 2 === 0;
           const Icon = prog.icon;
           
