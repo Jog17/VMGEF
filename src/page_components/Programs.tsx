@@ -76,7 +76,7 @@ export default function Programs({ programs }: ProgramsProps) {
     subtitle: p.subtitle,
     description: p.description,
     icon: fallbackPrograms[i % fallbackPrograms.length].icon, // Keep fallback icons for now
-    image: p.image ? urlForImage(p.image).url() : fallbackPrograms[i % fallbackPrograms.length].image,
+    image: fallbackPrograms[i % fallbackPrograms.length].image,
     color: p.color || fallbackPrograms[i % fallbackPrograms.length].color,
     textColor: p.textColor || fallbackPrograms[i % fallbackPrograms.length].textColor
   })) : fallbackPrograms;

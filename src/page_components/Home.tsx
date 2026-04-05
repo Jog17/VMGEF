@@ -270,7 +270,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
             {/* BAE - Large Feature */}
             <div className="bento-item md:col-span-2 lg:col-span-2 row-span-2 bg-vmgef-ink text-white p-10 flex flex-col justify-between group overflow-hidden relative rounded-3xl">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-              <img src={programs && programs.length > 0 && programs[0].image ? urlForImage(programs[0].image).url() : "/vmgef_pics/IMG-20251002-WA0039.jpg"} alt="Entrepreneurship" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+              <img src="/vmgef_pics/IMG-20251002-WA0039.jpg" alt="Entrepreneurship" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
               <div className="relative z-20">
                 <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6">
                   <BookOpen size={24} className="text-white" />
@@ -493,7 +493,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
             <div className="fade-up group relative overflow-hidden rounded-3xl bg-vmgef-ink text-white">
               <div className="absolute inset-0 z-0">
                 <img 
-                  src={featuredEvents && featuredEvents.length > 0 && featuredEvents[0].image ? urlForImage(featuredEvents[0].image).url() : "/vmgef_pics/IMG-20251002-WA0052.jpg"} 
+                  src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
                   alt="Gala Event" 
                   className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
@@ -554,7 +554,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
             </p>
             <div className="flex items-center justify-center gap-4">
               <div className="w-12 h-12 rounded-full bg-vmgef-ink/10 overflow-hidden">
-                <img src={testimonials && testimonials.length > 0 && testimonials[0].image ? urlForImage(testimonials[0].image).url() : "/vmgef_pics/IMG-20251002-WA0040.jpg"} alt="Student" className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
+                <img src="/vmgef_pics/IMG-20251002-WA0040.jpg" alt="Student" className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
               </div>
               <div className="text-left">
                 <div className="font-bold text-vmgef-ink text-sm uppercase tracking-widest">{testimonials && testimonials.length > 0 ? testimonials[0].author : "Ama Mensah"}</div>

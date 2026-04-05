@@ -21,10 +21,10 @@
     "lucide-react": "^1.7.0",
     "motion": "^12.38.0",
     "next": "15.1.6",
-    "next-sanity": "latest",
+    "next-sanity": "^11.6.12",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "sanity": "latest",
+    "sanity": "^4.22.0",
     "styled-components": "^6.3.12",
     "tailwind-merge": "^3.5.0"
   },

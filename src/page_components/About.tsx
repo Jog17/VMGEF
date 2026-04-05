@@ -133,7 +133,7 @@ export default function About({ teamMembers }: AboutProps) {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div className="fade-up md:col-span-5 h-[600px] overflow-hidden rounded-3xl">
               <img 
-                src={founder && founder.image ? urlForImage(founder.image).url() : "/vmgef_pics/IMG-20251002-WA0022.jpg"} 
+                src="/vmgef_pics/IMG-20251002-WA0022.jpg" 
                 alt={founder ? founder.name : "Jahzara Agyemang"} 
                 className="w-full h-full object-cover grayscale"
                 referrerPolicy="no-referrer"
