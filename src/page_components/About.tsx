@@ -75,7 +75,7 @@ export default function About({ teamMembers }: AboutProps) {
           </div>
           <div className="h-[500px] lg:h-[700px] overflow-hidden about-hero-img relative rounded-3xl">
             <img 
-              src="/vmgef_pics/IMG-20251127-WA0069.jpg" 
+              src="/images/IMG-20251127-WA0069.jpg" 
               alt="Community support" 
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
               referrerPolicy="no-referrer"
@@ -109,7 +109,7 @@ export default function About({ teamMembers }: AboutProps) {
       <section className="parallax-section relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-vmgef-ink">
           <img 
-            src="/vmgef_pics/IMG-20251127-WA0064.jpg" 
+            src="/images/IMG-20251127-WA0064.jpg" 
             alt="Education" 
             className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-30"
             referrerPolicy="no-referrer"
@@ -133,7 +133,7 @@ export default function About({ teamMembers }: AboutProps) {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div className="fade-up md:col-span-5 h-[600px] overflow-hidden rounded-3xl">
               <img 
-                src="/vmgef_pics/IMG-20251002-WA0022.jpg" 
+                src="/images/IMG-20251002-WA0022.jpg" 
                 alt={founder ? founder.name : "Jahzara Agyemang"} 
                 className="w-full h-full object-cover grayscale"
                 referrerPolicy="no-referrer"
