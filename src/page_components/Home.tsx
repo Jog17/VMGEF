@@ -358,7 +358,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="parallax-container h-[600px] overflow-hidden relative rounded-3xl">
               <img 
-                src="/vmgef_pics/IMG-20251002-WA0022.jpg" 
+                src="/vmgef_pics/jahzara.jpg" 
                 alt="Jahzara Agyemang" 
                 className="parallax-img absolute -top-[20%] left-0 w-full h-[140%] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                 referrerPolicy="no-referrer"
