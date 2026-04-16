@@ -73,7 +73,7 @@ export default function Impact() {
       <section className="parallax-container relative max-w-7xl mx-auto px-6 md:px-12 mb-20 text-center overflow-hidden rounded-3xl py-24">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/images/IMG-20251002-WA0034.jpg" 
+            src="/vmgef_pics/IMG-20251002-WA0034.jpg" 
             alt="Impact Hero" 
             className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
             referrerPolicy="no-referrer"
@@ -134,7 +134,7 @@ export default function Impact() {
             </div>
             <div className="relative h-[400px] lg:h-auto">
               <img 
-                src="/images/ukerewe map.jpg" 
+                src="/vmgef_pics/ukerewe map.jpg" 
                 alt="Ukerewe Map" 
                 className="absolute inset-0 w-full h-full object-cover opacity-60"
                 referrerPolicy="no-referrer"
@@ -142,7 +142,7 @@ export default function Impact() {
               <div className="absolute inset-0 bg-gradient-to-r from-vmgef-ink to-transparent"></div>
               <div className="absolute bottom-8 right-8 w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-xl">
                 <img 
-                  src="/images/tanzania flag.png" 
+                  src="/vmgef_pics/tanzania flag.png" 
                   alt="Tanzania Flag" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -166,7 +166,7 @@ export default function Impact() {
           <div className="fade-up group">
             <div className="relative h-[400px] overflow-hidden mb-6 rounded-3xl">
               <img 
-                src="/images/IMG-20251002-WA0035.jpg" 
+                src="/vmgef_pics/IMG-20251002-WA0035.jpg" 
                 alt="Mpatase Clinic" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
@@ -180,7 +180,7 @@ export default function Impact() {
           <div className="fade-up group">
             <div className="relative h-[400px] overflow-hidden mb-6 rounded-3xl">
               <img 
-                src="/images/IMG-20251002-WA0036.jpg" 
+                src="/vmgef_pics/IMG-20251002-WA0036.jpg" 
                 alt="STEM Education" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"

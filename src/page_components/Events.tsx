@@ -62,7 +62,7 @@ export default function Events({ events, featuredEvents }: EventsProps) {
       <section className="parallax-container relative max-w-7xl mx-auto px-6 md:px-12 mb-24 text-center overflow-hidden rounded-3xl py-24">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/images/IMG-20251002-WA0052.jpg" 
+            src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
             alt="Events Hero" 
             className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
             referrerPolicy="no-referrer"

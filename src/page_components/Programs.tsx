@@ -17,7 +17,7 @@ const fallbackPrograms = [
     subtitle: "14-Week Senior-High Course",
     description: "A comprehensive 14-week entrepreneurship course designed for senior-high students. We teach essential business planning, financial literacy, and strategic thinking. The program culminates in a high-stakes pitch competition where the winner receives a GHS 10,000 grant and 6 months of dedicated mentorship to launch their business.",
     icon: BookOpen,
-    image: "/images/IMG-20251002-WA0038.jpg",
+    image: "/vmgef_pics/IMG-20251002-WA0038.jpg",
     color: "bg-vmgef-ink",
     textColor: "text-white"
   },
@@ -27,7 +27,7 @@ const fallbackPrograms = [
     subtitle: "8-Week Empowerment Series",
     description: "An intensive 8-week empowerment series specifically tailored for junior-high girls. The curriculum covers critical life skills including self-confidence, integrity, navigating peer-pressure, journaling, and emotional growth. We pair this with ongoing mentorship to ensure lasting impact.",
     icon: Heart,
-    image: "/images/IMG-20251127-WA0065.jpg",
+    image: "/vmgef_pics/IMG-20251127-WA0065.jpg",
     color: "bg-[#F4F1ED]",
     textColor: "text-vmgef-ink"
   },
@@ -37,7 +37,7 @@ const fallbackPrograms = [
     subtitle: "Mpatase Clinic Equipment Drive",
     description: "In partnership with local Queen Mother Nanahemaa Araba Acquaah I and the Jabony Fountain Foundation, we are outfitting a newly constructed rural clinic in Mpatase, Western Region. This vital 7-room facility includes a dedicated labor suite, bringing essential healthcare to an underserved community.",
     icon: Stethoscope,
-    image: "/images/IMG-20251002-WA0035.jpg",
+    image: "/vmgef_pics/IMG-20251002-WA0035.jpg",
     color: "bg-white",
     textColor: "text-vmgef-ink"
   },
@@ -47,7 +47,7 @@ const fallbackPrograms = [
     subtitle: "Partnering with Univ. of Education, Winneba",
     description: "We believe the future of innovation lies in the hands of young women. VMGEF provides full 4-year university scholarships for young women pursuing degrees in science and technology. This is paired with an 18-week rural STEM mentoring program to build a pipeline of future female technologists.",
     icon: GraduationCap,
-    image: "/images/IMG-20251002-WA0036.jpg",
+    image: "/vmgef_pics/IMG-20251002-WA0036.jpg",
     color: "bg-vmgef-ink",
     textColor: "text-white"
   },
@@ -57,7 +57,7 @@ const fallbackPrograms = [
     subtitle: "Climate-Smart Agriculture",
     description: "Addressing food security and climate change simultaneously. We teach climate-smart agriculture and tree-planting through hands-on community classes. Aided by partners like 'The Garden Boy', we equip locals with the skills for sustainable urban farming and environmental stewardship.",
     icon: Leaf,
-    image: "/images/IMG-20251002-WA0037.jpg",
+    image: "/vmgef_pics/IMG-20251002-WA0037.jpg",
     color: "bg-[#E8EFE9]",
     textColor: "text-vmgef-ink"
   }
@@ -136,7 +136,7 @@ export default function Programs({ programs }: ProgramsProps) {
       <section className="parallax-container relative max-w-7xl mx-auto px-6 md:px-12 mb-24 text-center overflow-hidden rounded-3xl py-24">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/images/IMG-20251002-WA0038.jpg" 
+            src="/vmgef_pics/IMG-20251002-WA0038.jpg" 
             alt="Programs Hero" 
             className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
             referrerPolicy="no-referrer"

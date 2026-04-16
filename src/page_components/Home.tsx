@@ -133,7 +133,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
             playsInline
             className="w-full h-full object-cover opacity-40 scale-105"
           >
-            <source src="/images/VID-20250425-WA0008.mp4" type="video/mp4" />
+            <source src="/vmgef_pics/VID-20250425-WA0008.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-vmgef-ink/60 via-vmgef-ink/40 to-vmgef-bg"></div>
         </div>
@@ -180,7 +180,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
           <div className="featured-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Item 1: Tanzania Tour */}
             <Link href="/events" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/images/IMG-20251127-WA0065.jpg" alt="Tanzania School Tour" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+              <img src="/vmgef_pics/IMG-20251127-WA0065.jpg" alt="Tanzania School Tour" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
               <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
                 <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -194,7 +194,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
 
             {/* Item 2: Our Impact */}
             <Link href="/impact" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/images/IMG-20251002-WA0034.jpg" alt="Our Impact" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+              <img src="/vmgef_pics/IMG-20251002-WA0034.jpg" alt="Our Impact" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
               <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -208,7 +208,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
 
             {/* Item 3: 3rd Annual Gala */}
             <Link href="/events" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/images/IMG-20251002-WA0052.jpg" alt="3rd Annual Gala" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+              <img src="/vmgef_pics/IMG-20251002-WA0052.jpg" alt="3rd Annual Gala" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
               <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
                 <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -222,7 +222,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
 
             {/* Item 4: BAE Program */}
             <Link href="/programs" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/images/IMG-20251002-WA0038.jpg" alt="BAE Program" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+              <img src="/vmgef_pics/IMG-20251002-WA0038.jpg" alt="BAE Program" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
               <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -270,7 +270,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
             {/* BAE - Large Feature */}
             <div className="bento-item md:col-span-2 lg:col-span-2 row-span-2 bg-vmgef-ink text-white p-10 flex flex-col justify-between group overflow-hidden relative rounded-3xl">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-              <img src="/images/IMG-20251002-WA0039.jpg" alt="Entrepreneurship" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
+              <img src="/vmgef_pics/IMG-20251002-WA0039.jpg" alt="Entrepreneurship" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
               <div className="relative z-20">
                 <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6">
                   <BookOpen size={24} className="text-white" />
@@ -338,7 +338,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
           <div className="fade-up parallax-video-container relative w-full max-w-5xl mx-auto aspect-video bg-black group cursor-pointer overflow-hidden shadow-2xl rounded-3xl">
             {/* Placeholder for actual video thumbnail */}
             <img 
-              src="/images/IMG-20251127-WA0068.jpg" 
+              src="/vmgef_pics/IMG-20251127-WA0068.jpg" 
               alt="Video Thumbnail" 
               className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
               referrerPolicy="no-referrer"
@@ -358,7 +358,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="parallax-container h-[600px] overflow-hidden relative rounded-3xl">
               <img 
-                src="/images/IMG-20251002-WA0022.jpg" 
+                src="/vmgef_pics/IMG-20251002-WA0022.jpg" 
                 alt="Jahzara Agyemang" 
                 className="parallax-img absolute -top-[20%] left-0 w-full h-[140%] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                 referrerPolicy="no-referrer"
@@ -493,7 +493,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
             <div className="fade-up group relative overflow-hidden rounded-3xl bg-vmgef-ink text-white">
               <div className="absolute inset-0 z-0">
                 <img 
-                  src="/images/IMG-20251002-WA0052.jpg" 
+                  src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
                   alt="Gala Event" 
                   className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
@@ -554,7 +554,7 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
             </p>
             <div className="flex items-center justify-center gap-4">
               <div className="w-12 h-12 rounded-full bg-vmgef-ink/10 overflow-hidden">
-                <img src="/images/IMG-20251002-WA0040.jpg" alt="Student" className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
+                <img src="/vmgef_pics/IMG-20251002-WA0040.jpg" alt="Student" className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
               </div>
               <div className="text-left">
                 <div className="font-bold text-vmgef-ink text-sm uppercase tracking-widest">{testimonials && testimonials.length > 0 ? testimonials[0].author : "Ama Mensah"}</div>
