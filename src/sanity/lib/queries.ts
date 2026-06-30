@@ -1,6 +1,10 @@
 import { client } from './client'
+import { projectId } from '../env'
+
+const isConfigured = projectId !== 'your-project-id'
 
 export async function getPrograms() {
+  if (!isConfigured) return [];
   try {
     return await client.fetch(`*[_type == "program"] | order(_createdAt desc)`)
   } catch (error) {
@@ -10,6 +14,7 @@ export async function getPrograms() {
 }
 
 export async function getEvents() {
+  if (!isConfigured) return [];
   try {
     return await client.fetch(`*[_type == "event"] | order(date asc)`)
   } catch (error) {
@@ -19,6 +24,7 @@ export async function getEvents() {
 }
 
 export async function getFeaturedEvents() {
+  if (!isConfigured) return [];
   try {
     return await client.fetch(`*[_type == "event" && isFeatured == true] | order(date asc)`)
   } catch (error) {
@@ -28,6 +34,7 @@ export async function getFeaturedEvents() {
 }
 
 export async function getTestimonials() {
+  if (!isConfigured) return [];
   try {
     return await client.fetch(`*[_type == "testimonial"] | order(_createdAt desc)`)
   } catch (error) {
@@ -37,6 +44,7 @@ export async function getTestimonials() {
 }
 
 export async function getTeamMembers() {
+  if (!isConfigured) return [];
   try {
     return await client.fetch(`*[_type == "teamMember"] | order(_createdAt asc)`)
   } catch (error) {
