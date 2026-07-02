@@ -14,9 +14,10 @@ interface HomeProps {
   programs: any[];
   featuredEvents: any[];
   testimonials: any[];
+  homePageData?: any;
 }
 
-export default function Home({ programs, featuredEvents, testimonials }: HomeProps) {
+export default function Home({ programs, featuredEvents, testimonials, homePageData }: HomeProps) {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -142,18 +143,26 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
           <div className="mb-8 flex items-center gap-6 overflow-hidden">
             <div className="hero-line h-[1px] w-16 bg-vmgef-orange"></div>
             <span className="hero-subtitle text-vmgef-orange tracking-[0.25em] uppercase text-xs md:text-sm font-semibold">
-              Vince Memorial Garden & Education Foundation
+              {homePageData?.hero?.subtitle || "Vince Memorial Garden & Education Foundation"}
             </span>
             <div className="hero-line h-[1px] w-16 bg-vmgef-orange"></div>
           </div>
 
           <h1 className="font-serif text-6xl md:text-8xl lg:text-[7.5rem] text-white leading-[0.9] tracking-tight max-w-6xl mb-10">
-            <div className="overflow-hidden pb-2"><div className="hero-title-line">Education is</div></div>
-            <div className="overflow-hidden pb-2"><div className="hero-title-line">my <span className="italic text-vmgef-orange">Superpower.</span></div></div>
+            {homePageData?.hero?.titleLines ? (
+              homePageData.hero.titleLines.map((line: string, i: number) => (
+                <div key={i} className="overflow-hidden pb-2"><div className="hero-title-line">{line}</div></div>
+              ))
+            ) : (
+              <>
+                <div className="overflow-hidden pb-2"><div className="hero-title-line">Education is</div></div>
+                <div className="overflow-hidden pb-2"><div className="hero-title-line">my <span className="italic text-vmgef-orange">Superpower.</span></div></div>
+              </>
+            )}
           </h1>
 
           <p className="hero-desc text-lg md:text-xl text-white/80 max-w-2xl mb-14 font-light leading-relaxed">
-            Dedicated to the legacy of Vince. We provide tangible solutions to unemployment through impactful educational programs, empowering Ghanaian youth and women.
+            {homePageData?.hero?.description || "Dedicated to the legacy of Vince. We provide tangible solutions to unemployment through impactful educational programs, empowering Ghanaian youth and women."}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
@@ -242,10 +251,10 @@ export default function Home({ programs, featuredEvents, testimonials }: HomePro
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="fade-up max-w-5xl mx-auto text-center">
             <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-vmgef-ink leading-[1.1] tracking-tight mb-12">
-              "Dedicated to the legacy of the best man I have ever known, my late son Vince."
+              {homePageData?.mission?.quote || '"Dedicated to the legacy of the best man I have ever known, my late son Vince."'}
             </h2>
             <p className="text-xl md:text-2xl text-vmgef-ink-light font-light leading-relaxed max-w-3xl mx-auto">
-              Founded in 2023 by educator Jahzara Agyemang, M.Ed., our vision is to empower Ghanaian youth and women via education and skills training.
+              {homePageData?.mission?.description || "Founded in 2023 by educator Jahzara Agyemang, M.Ed., our vision is to empower Ghanaian youth and women via education and skills training."}
             </p>
           </div>
         </div>

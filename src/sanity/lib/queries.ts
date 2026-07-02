@@ -52,3 +52,23 @@ export async function getTeamMembers() {
     return [];
   }
 }
+
+export async function getHomePage() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "homePage"][0]`)
+  } catch (error) {
+    console.error("Error fetching home page:", error);
+    return null;
+  }
+}
+
+export async function getAboutPage() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "aboutPage"][0]`)
+  } catch (error) {
+    console.error("Error fetching about page:", error);
+    return null;
+  }
+}
