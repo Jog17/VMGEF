@@ -47,5 +47,16 @@ export const aboutPageType = defineType({
         defineField({ name: 'backgroundImage', title: 'Background Image', type: 'image', options: { hotspot: true } }),
       ],
     }),
+    defineField({
+      name: 'leadership',
+      title: 'Leadership Section',
+      type: 'object',
+      fields: [
+        defineField({ name: 'subtitle', title: 'Subtitle', type: 'string', initialValue: 'Leadership' }),
+        defineField({ name: 'title', title: 'Title', type: 'string', initialValue: 'Who We Are' }),
+        defineField({ name: 'headquarters', title: 'Headquarters', type: 'string', initialValue: 'Weija, Accra, Ghana' }),
+        defineField({ name: 'teamDetails', title: 'Team Details', type: 'string', initialValue: 'Small core staff & dedicated volunteers' }),
+      ],
+    }),
   ],
 })

@@ -156,10 +156,9 @@ export default function About({ teamMembers, aboutPageData }: AboutProps) {
       <section className="py-32 bg-vmgef-bg">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="fade-up mb-16 text-center">
-            <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-4 block">Leadership</span>
-            <h2 className="font-serif text-5xl text-vmgef-ink">Who We Are</h2>
+            <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-4 block">{aboutPageData?.leadership?.subtitle || "Leadership"}</span>
+            <h2 className="font-serif text-5xl text-vmgef-ink">{aboutPageData?.leadership?.title || "Who We Are"}</h2>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div className="fade-up md:col-span-5 h-[600px] overflow-hidden rounded-3xl">
               <img 
@@ -187,11 +186,11 @@ export default function About({ teamMembers, aboutPageData }: AboutProps) {
               <div className="grid grid-cols-2 gap-8 border-t border-vmgef-ink/10 pt-8">
                 <div>
                   <h4 className="font-serif text-2xl text-vmgef-ink mb-2">Headquarters</h4>
-                  <p className="text-vmgef-ink-light font-light">Weija, Accra, Ghana</p>
+                  <p className="text-vmgef-ink-light font-light">{aboutPageData?.leadership?.headquarters || "Weija, Accra, Ghana"}</p>
                 </div>
                 <div>
                   <h4 className="font-serif text-2xl text-vmgef-ink mb-2">Team</h4>
-                  <p className="text-vmgef-ink-light font-light">Small core staff & dedicated volunteers</p>
+                  <p className="text-vmgef-ink-light font-light">{aboutPageData?.leadership?.teamDetails || "Small core staff & dedicated volunteers"}</p>
                 </div>
               </div>
             </div>

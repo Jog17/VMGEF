@@ -133,6 +133,12 @@ async function seedSingletons() {
     },
     parallax: {
       quote: '"We provide tangible solutions to unemployment through a variety of impactful educational programs."'
+    },
+    leadership: {
+      subtitle: 'Leadership',
+      title: 'Who We Are',
+      headquarters: 'Weija, Accra, Ghana',
+      teamDetails: 'Small core staff & dedicated volunteers'
     }
   };
 
