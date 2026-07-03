@@ -192,41 +192,30 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="fade-up border border-vmgef-ink/10 p-8 hover:shadow-xl transition-shadow duration-500 rounded-3xl">
-              <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-4 block">March 9, 2024</span>
-              <h3 className="font-serif text-2xl text-vmgef-ink mb-4">1st Annual Gala Dinner & Fundraiser</h3>
-              <p className="text-vmgef-ink-light font-light mb-6">Our inaugural black-tie event held in Accra, establishing the foundation's presence and raising critical funds for our pilot programs.</p>
-              <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
-                <MapPin size={16} className="text-vmgef-orange" /> Accra, Ghana
+            {events && events.length > 0 ? (
+              events.filter(e => !e.isFeatured).map((event: any, idx: number) => (
+                <div key={event._id || idx} className={`fade-up border border-vmgef-ink/10 p-8 hover:shadow-xl transition-shadow duration-500 rounded-3xl ${new Date(event.date) > new Date() ? 'bg-vmgef-bg border-vmgef-orange/20' : ''}`}>
+                  <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-4 block">
+                    {new Date(event.date) > new Date() ? "Upcoming • " : ""}
+                    {new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </span>
+                  <h3 className="font-serif text-2xl text-vmgef-ink mb-4">{event.title}</h3>
+                  <p className="text-vmgef-ink-light font-light mb-6">{event.description}</p>
+                  <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
+                    {event.location.toLowerCase().includes('online') ? (
+                      <Ticket size={16} className="text-vmgef-orange" />
+                    ) : (
+                      <MapPin size={16} className="text-vmgef-orange" />
+                    )} 
+                    {event.location}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="fade-up border border-vmgef-ink/10 p-8 hover:shadow-xl transition-shadow duration-500 rounded-3xl">
+                <p className="text-vmgef-ink-light font-light">No additional events available at this time.</p>
               </div>
-            </div>
-
-            <div className="fade-up border border-vmgef-ink/10 p-8 hover:shadow-xl transition-shadow duration-500 rounded-3xl">
-              <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-4 block">October 2024</span>
-              <h3 className="font-serif text-2xl text-vmgef-ink mb-4">EEEC & Youth Job Fair</h3>
-              <p className="text-vmgef-ink-light font-light mb-6">Entrepreneurship Education & Empowerment Conference. A 2-day business and mentorship workshop co-hosted with JTE Business Consult.</p>
-              <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
-                <MapPin size={16} className="text-vmgef-orange" /> St. Giles Center, Accra
-              </div>
-            </div>
-
-            <div className="fade-up border border-vmgef-ink/10 p-8 hover:shadow-xl transition-shadow duration-500 rounded-3xl">
-              <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-4 block">October 2024</span>
-              <h3 className="font-serif text-2xl text-vmgef-ink mb-4">Community Beach Clean-Up</h3>
-              <p className="text-vmgef-ink-light font-light mb-6">A grassroots environmental initiative bringing together volunteers to clean local beaches and promote climate-smart practices.</p>
-              <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
-                <MapPin size={16} className="text-vmgef-orange" /> Accra, Ghana
-              </div>
-            </div>
-
-            <div className="fade-up bg-vmgef-bg p-8 border border-vmgef-orange/20 rounded-3xl">
-              <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-4 block">Upcoming • Dec 2025</span>
-              <h3 className="font-serif text-2xl text-vmgef-ink mb-4">Virtual Info Session</h3>
-              <p className="text-vmgef-ink-light font-light mb-6">Information session for the "Confident Girls Bright Futures – Tanzania School Tour 2026".</p>
-              <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
-                <Ticket size={16} className="text-vmgef-orange" /> Online Event
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

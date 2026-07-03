@@ -262,7 +262,8 @@ async function seedSingletons() {
         title: 'Online Donation',
         description: 'Securely donate from anywhere in the world using your credit or debit card.',
         buttonText: 'Donate via Donorbox',
-        buttonLink: 'https://donorbox.org/events/728823/steps/choose_tickets'
+        buttonLink: 'https://donorbox.org/events/728823/steps/choose_tickets',
+        donorboxUrl: 'https://donorbox.org/embed/vince-memorial-garden-education-foundation?default_interval=o'
       }
     },
     financialTransparency: {
@@ -286,7 +287,53 @@ async function seedSingletons() {
     }
   };
 
-  const docs: any[] = [homePage, aboutPage, siteSettings, programsPage, eventsPage, impactPage, donatePage];
+  const docs: any[] = [homePage, aboutPage, siteSettings, programsPage, eventsPage, impactPage, donatePage,
+    {
+      _id: 'event-gala-2nd',
+      _type: 'event',
+      title: '2nd Annual Gala',
+      date: '2025-03-09T16:00:00.000Z',
+      location: 'Canis Majoris Center, Awoshie - Ghana',
+      description: 'Honoring Women Making an Impact in the Community',
+      isFeatured: true
+    },
+    {
+      _id: 'event-gala-1st',
+      _type: 'event',
+      title: '1st Annual Gala Dinner & Fundraiser',
+      date: '2024-03-09T16:00:00.000Z',
+      location: 'Accra, Ghana',
+      description: 'Our inaugural black-tie event held in Accra, establishing the foundation\'s presence and raising critical funds for our pilot programs.',
+      isFeatured: false
+    },
+    {
+      _id: 'event-eeec',
+      _type: 'event',
+      title: 'EEEC & Youth Job Fair',
+      date: '2024-10-15T09:00:00.000Z',
+      location: 'St. Giles Center, Accra',
+      description: 'Entrepreneurship Education & Empowerment Conference. A 2-day business and mentorship workshop co-hosted with JTE Business Consult.',
+      isFeatured: false
+    },
+    {
+      _id: 'event-beach',
+      _type: 'event',
+      title: 'Community Beach Clean-Up',
+      date: '2024-10-20T08:00:00.000Z',
+      location: 'Accra, Ghana',
+      description: 'A grassroots environmental initiative bringing together volunteers to clean local beaches and promote climate-smart practices.',
+      isFeatured: false
+    },
+    {
+      _id: 'event-virtual-info',
+      _type: 'event',
+      title: 'Virtual Info Session',
+      date: '2025-12-01T14:00:00.000Z',
+      location: 'Online Event',
+      description: 'Information session for the "Confident Girls Bright Futures – Tanzania School Tour 2026".',
+      isFeatured: false
+    }
+  ];
 
   for (const doc of docs) {
     console.log(`Creating/updating ${doc._type}...`);

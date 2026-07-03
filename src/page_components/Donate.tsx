@@ -123,21 +123,36 @@ export default function Donate({ donatePageData }: DonateProps) {
             {/* Online Donation */}
             <div className="fade-up bg-vmgef-ink text-white p-8 md:p-10 shadow-xl relative overflow-hidden rounded-3xl">
               <div className="absolute top-0 right-0 w-64 h-64 bg-vmgef-orange/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-              <div className="relative z-10 flex items-start gap-6">
+              <div className="relative z-10 flex flex-col md:flex-row items-start gap-6">
                 <div className="w-14 h-14 bg-vmgef-orange rounded-full flex items-center justify-center shrink-0">
                   <CreditCard size={28} className="text-white" />
                 </div>
-                <div>
-                  <h3 className="font-serif text-2xl mb-2">Online Donation</h3>
-                  <p className="text-white/70 font-light mb-8">Securely donate from anywhere in the world using your credit or debit card.</p>
-                  <a 
-                    href="https://donorbox.org/events/728823/steps/choose_tickets" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-block bg-vmgef-orange text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-white hover:text-vmgef-ink transition-colors duration-300 rounded-full"
-                  >
-                    Donate via Donorbox
-                  </a>
+                <div className="flex-1 w-full">
+                  <h3 className="font-serif text-2xl mb-2">{donatePageData?.donationOptions?.online?.title || "Online Donation"}</h3>
+                  <p className="text-white/70 font-light mb-8">{donatePageData?.donationOptions?.online?.description || "Securely donate from anywhere in the world using your credit or debit card."}</p>
+                  
+                  {donatePageData?.donationOptions?.online?.donorboxUrl ? (
+                    <div className="w-full bg-white rounded-xl overflow-hidden min-h-[400px]">
+                      <iframe 
+                        src={donatePageData.donationOptions.online.donorboxUrl} 
+                        name="donorbox" 
+                        allow="payment"
+                        frameBorder="0" 
+                        scrolling="no" 
+                        className="w-full h-[600px] md:h-[900px]"
+                        style={{ maxWidth: '100%', minWidth: '250px', maxHeight: 'none' }}
+                      ></iframe>
+                    </div>
+                  ) : (
+                    <a 
+                      href={donatePageData?.donationOptions?.online?.buttonLink || "https://donorbox.org/events/728823/steps/choose_tickets"} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block bg-vmgef-orange text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-white hover:text-vmgef-ink transition-colors duration-300 rounded-full"
+                    >
+                      {donatePageData?.donationOptions?.online?.buttonText || "Donate via Donorbox"}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
