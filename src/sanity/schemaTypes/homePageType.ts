@@ -77,5 +77,61 @@ export const homePageType = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'videoSection',
+      title: 'Video Section',
+      type: 'object',
+      fields: [
+        defineField({ name: 'subtitle', title: 'Subtitle', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string' }),
+        defineField({ name: 'thumbnail', title: 'Thumbnail', type: 'image', options: { hotspot: true } }),
+      ],
+    }),
+    defineField({
+      name: 'founderStory',
+      title: 'Founder Story',
+      type: 'object',
+      fields: [
+        defineField({ name: 'subtitle', title: 'Subtitle', type: 'string' }),
+        defineField({ name: 'title', title: 'Title', type: 'string' }),
+        defineField({ name: 'description', title: 'Description (Paragraphs)', type: 'array', of: [{ type: 'string' }] }),
+        defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
+      ],
+    }),
+    defineField({
+      name: 'partners',
+      title: 'Partners & Affiliates',
+      type: 'object',
+      fields: [
+        defineField({ name: 'title', title: 'Title', type: 'string' }),
+        defineField({ name: 'partnerNames', title: 'Partner Names', type: 'array', of: [{ type: 'string' }] }),
+      ]
+    }),
+    defineField({
+      name: 'impactStats',
+      title: 'Impact Stats',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'number', title: 'Number', type: 'string' }),
+            defineField({ name: 'label', title: 'Label', type: 'string' }),
+            defineField({ name: 'sub', title: 'Sub-label', type: 'string' }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: 'finalCta',
+      title: 'Final CTA',
+      type: 'object',
+      fields: [
+        defineField({ name: 'title', title: 'Title', type: 'string' }),
+        defineField({ name: 'description', title: 'Description', type: 'text' }),
+        defineField({ name: 'buttonText', title: 'Button Text', type: 'string' }),
+        defineField({ name: 'buttonLink', title: 'Button Link', type: 'string' }),
+      ]
+    }),
   ],
 })

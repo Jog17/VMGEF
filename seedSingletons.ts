@@ -32,6 +32,63 @@ async function seedSingletons() {
     mission: {
       quote: '"Dedicated to the legacy of the best man I have ever known, my late son Vince."',
       description: 'Founded in 2023 by educator Jahzara Agyemang, M.Ed., our vision is to empower Ghanaian youth and women via education and skills training.',
+    },
+    featuredInitiatives: [
+      {
+        _key: 'fi1',
+        title: 'Confident Girls Bright Futures Tanzania School Tour',
+        subtitle: 'March Event',
+        description: 'Click to learn more about the project and ways to donate.',
+        link: '/events',
+      },
+      {
+        _key: 'fi2',
+        title: 'Our 2025\nImpact',
+        subtitle: 'Year in Review',
+        description: 'See the tangible difference we are making this year.',
+        link: '/impact',
+      },
+      {
+        _key: 'fi3',
+        title: '3rd Annual VMGEF Fundraising Gala',
+        subtitle: 'July 25',
+        description: 'Join us for a night of excellence and impact in Accra.',
+        link: '/events',
+      },
+      {
+        _key: 'fi4',
+        title: 'Building an Entrepreneur',
+        subtitle: 'Flagship Program',
+        description: 'Our 14-week course transforming high school students into business leaders.',
+        link: '/programs',
+      }
+    ],
+    videoSection: {
+      subtitle: 'Watch Our Impact',
+      title: 'The VMGEF Story',
+    },
+    founderStory: {
+      subtitle: 'The Founder',
+      title: 'Jahzara Agyemang, M.Ed.',
+      description: [
+        "Also known as Obaa Yaa Papabi, Jahzara is a Philadelphia-raised, Ghana-based educator and entrepreneur. Having served as a professor and nonprofit director in the US and Ghana, her life's work is dedicated to leadership in education and women's empowerment.",
+        "After the tragic passing of her beloved son Vince, Jahzara channeled her profound grief into the creation of VMGEF. The foundation stands as a living testament to Vince's compassionate spirit, transforming sorrow into a powerful engine for social change and youth upliftment across West Africa."
+      ],
+    },
+    partners: {
+      title: 'Trusted Partners & Affiliates',
+      partnerNames: ['Univ. of Education, Winneba', 'STEM Girls Foundation', 'Mpatase Rural Clinic', 'Global Empowerment Network', 'Ghana Tech Hub'],
+    },
+    impactStats: [
+      { _key: 'stat1', number: '14', label: 'Week Entrepreneurship Course', sub: 'Building an Entrepreneur (BAE)' },
+      { _key: 'stat2', number: '4', label: 'Year STEM Scholarships', sub: 'Partnering with Univ. of Education, Winneba' },
+      { _key: 'stat3', number: '7', label: 'Room Rural Clinic Outfitted', sub: 'Mpatase Clinic Equipment Drive' },
+    ],
+    finalCta: {
+      title: 'Ready to make an impact?',
+      description: 'Join us in empowering the next generation of Ghanaian leaders, innovators, and entrepreneurs.',
+      buttonText: 'Donate Now',
+      buttonLink: '/donate',
     }
   };
 

@@ -187,61 +187,53 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
       <section className="py-24 bg-vmgef-bg relative z-20 -mt-20">
         <div className="max-w-[96rem] mx-auto px-6 md:px-12">
           <div className="featured-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Item 1: Tanzania Tour */}
-            <Link href="/events" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/vmgef_pics/IMG-20251127-WA0065.jpg" alt="Tanzania School Tour" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-              <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  <ArrowRight size={20} className="text-white" />
+            {(homePageData?.featuredInitiatives || [
+              {
+                title: 'Confident Girls Bright Futures Tanzania School Tour',
+                subtitle: 'March Event',
+                description: 'Click to learn more about the project and ways to donate.',
+                link: '/events',
+                fallbackImage: '/vmgef_pics/IMG-20251127-WA0065.jpg'
+              },
+              {
+                title: 'Our 2025\nImpact',
+                subtitle: 'Year in Review',
+                description: 'See the tangible difference we are making this year.',
+                link: '/impact',
+                fallbackImage: '/vmgef_pics/IMG-20251002-WA0034.jpg'
+              },
+              {
+                title: '3rd Annual Gala\nJoin Us',
+                subtitle: 'July 25',
+                description: 'Save the date for an unforgettable evening of celebration.',
+                link: '/events',
+                fallbackImage: '/vmgef_pics/IMG-20251002-WA0052.jpg'
+              },
+              {
+                title: 'Building an Entrepreneur',
+                subtitle: 'Senior High Program',
+                description: 'Click for program explanation and Google link to register your school.',
+                link: '/programs',
+                fallbackImage: '/vmgef_pics/IMG-20251002-WA0038.jpg'
+              }
+            ]).map((item: any, i: number) => (
+              <Link key={i} href={item.link || '#'} className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
+                {item.image ? (
+                  <img src={urlForImage(item.image)?.url() || ""} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+                ) : (
+                  <img src={item.fallbackImage || "/vmgef_pics/IMG-20251127-WA0065.jpg"} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                  <div className={`w-12 h-12 ${i % 2 === 0 ? 'bg-vmgef-orange' : 'bg-white'} rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100`}>
+                    <ArrowRight size={20} className={i % 2 === 0 ? 'text-white' : 'text-vmgef-ink'} />
+                  </div>
+                  <span className={`${i % 2 === 0 ? 'text-vmgef-orange' : 'text-white/70'} text-xs font-bold tracking-widest uppercase mb-3 block`}>{item.subtitle}</span>
+                  <h3 className="font-serif text-3xl mb-4 leading-tight whitespace-pre-line">{item.title}</h3>
+                  <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">{item.description}</p>
                 </div>
-                <span className="text-vmgef-orange text-xs font-bold tracking-widest uppercase mb-3 block">March Event</span>
-                <h3 className="font-serif text-3xl mb-4 leading-tight">Confident Girls Bright Futures Tanzania School Tour</h3>
-                <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">Click to learn more about the project and ways to donate.</p>
-              </div>
-            </Link>
-
-            {/* Item 2: Our Impact */}
-            <Link href="/impact" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/vmgef_pics/IMG-20251002-WA0034.jpg" alt="Our Impact" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-              <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  <ArrowRight size={20} className="text-vmgef-ink" />
-                </div>
-                <span className="text-white/70 text-xs font-bold tracking-widest uppercase mb-3 block">Year in Review</span>
-                <h3 className="font-serif text-3xl mb-4 leading-tight">Our 2025<br/>Impact</h3>
-                <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">See the tangible difference we are making this year.</p>
-              </div>
-            </Link>
-
-            {/* Item 3: 3rd Annual Gala */}
-            <Link href="/events" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/vmgef_pics/IMG-20251002-WA0052.jpg" alt="3rd Annual Gala" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-              <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  <ArrowRight size={20} className="text-white" />
-                </div>
-                <span className="text-vmgef-orange text-xs font-bold tracking-widest uppercase mb-3 block">July 25</span>
-                <h3 className="font-serif text-3xl mb-4 leading-tight">3rd Annual Gala<br/>Join Us</h3>
-                <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">Save the date for an unforgettable evening of celebration.</p>
-              </div>
-            </Link>
-
-            {/* Item 4: BAE Program */}
-            <Link href="/programs" className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-              <img src="/vmgef_pics/IMG-20251002-WA0038.jpg" alt="BAE Program" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-              <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                  <ArrowRight size={20} className="text-vmgef-ink" />
-                </div>
-                <span className="text-white/70 text-xs font-bold tracking-widest uppercase mb-3 block">Senior High Program</span>
-                <h3 className="font-serif text-3xl mb-4 leading-tight">Building an Entrepreneur</h3>
-                <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">Click for program explanation and Google link to register your school.</p>
-              </div>
-            </Link>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -340,18 +332,30 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
       <section className="py-24 md:py-32 bg-vmgef-ink relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="fade-up text-center mb-16">
-            <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-4 block">Watch Our Impact</span>
-            <h2 className="font-serif text-4xl md:text-5xl text-white">The VMGEF Story</h2>
+            <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-4 block">
+              {homePageData?.videoSection?.subtitle || "Watch Our Impact"}
+            </span>
+            <h2 className="font-serif text-4xl md:text-5xl text-white">
+              {homePageData?.videoSection?.title || "The VMGEF Story"}
+            </h2>
           </div>
           
           <div className="fade-up parallax-video-container relative w-full max-w-5xl mx-auto aspect-video bg-black group cursor-pointer overflow-hidden shadow-2xl rounded-3xl">
             {/* Placeholder for actual video thumbnail */}
-            <img 
-              src="/vmgef_pics/IMG-20251127-WA0068.jpg" 
-              alt="Video Thumbnail" 
-              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
-              referrerPolicy="no-referrer"
-            />
+            {homePageData?.videoSection?.thumbnail ? (
+              <img 
+                src={urlForImage(homePageData.videoSection.thumbnail)?.url() || ""} 
+                alt="Video Thumbnail" 
+                className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
+              />
+            ) : (
+              <img 
+                src="/vmgef_pics/IMG-20251127-WA0068.jpg" 
+                alt="Video Thumbnail" 
+                className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
+                referrerPolicy="no-referrer"
+              />
+            )}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-24 h-24 bg-vmgef-orange rounded-full flex items-center justify-center pl-2 shadow-[0_0_40px_rgba(255,99,33,0.4)] group-hover:scale-110 transition-transform duration-500">
                 <Play size={40} className="text-white" />
@@ -366,25 +370,43 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="parallax-container h-[600px] overflow-hidden relative rounded-3xl">
-              <img 
-                src="/vmgef_pics/jahzara.jpg" 
-                alt="Jahzara Agyemang" 
-                className="parallax-img absolute -top-[20%] left-0 w-full h-[140%] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                referrerPolicy="no-referrer"
-              />
+              {homePageData?.founderStory?.image ? (
+                <img 
+                  src={urlForImage(homePageData.founderStory.image)?.url() || ""} 
+                  alt={homePageData?.founderStory?.title || "Jahzara Agyemang"} 
+                  className="parallax-img absolute -top-[20%] left-0 w-full h-[140%] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                />
+              ) : (
+                <img 
+                  src="/vmgef_pics/jahzara.jpg" 
+                  alt="Jahzara Agyemang" 
+                  className="parallax-img absolute -top-[20%] left-0 w-full h-[140%] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                  referrerPolicy="no-referrer"
+                />
+              )}
             </div>
             <div className="fade-up flex flex-col justify-center">
-              <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">The Founder</span>
+              <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">
+                {homePageData?.founderStory?.subtitle || "The Founder"}
+              </span>
               <h2 className="font-serif text-5xl md:text-6xl text-vmgef-ink leading-tight mb-8">
-                Jahzara Agyemang, M.Ed.
+                {homePageData?.founderStory?.title || "Jahzara Agyemang, M.Ed."}
               </h2>
               <div className="space-y-6 text-lg text-vmgef-ink-light font-light leading-relaxed">
-                <p>
-                  Also known as Obaa Yaa Papabi, Jahzara is a Philadelphia-raised, Ghana-based educator and entrepreneur. Having served as a professor and nonprofit director in the US and Ghana, her life's work is dedicated to leadership in education and women's empowerment.
-                </p>
-                <p>
-                  In 2023, she launched VMGEF in Accra as a profound tribute to her late son, Vince. The foundation serves as a direct response to youth unemployment, transforming grief into a powerful engine for community impact.
-                </p>
+                {homePageData?.founderStory?.description ? (
+                  homePageData.founderStory.description.map((p: string, i: number) => (
+                    <p key={i}>{p}</p>
+                  ))
+                ) : (
+                  <>
+                    <p>
+                      Also known as Obaa Yaa Papabi, Jahzara is a Philadelphia-raised, Ghana-based educator and entrepreneur. Having served as a professor and nonprofit director in the US and Ghana, her life's work is dedicated to leadership in education and women's empowerment.
+                    </p>
+                    <p>
+                      In 2023, she launched VMGEF in Accra as a profound tribute to her late son, Vince. The foundation serves as a direct response to youth unemployment, transforming grief into a powerful engine for community impact.
+                    </p>
+                  </>
+                )}
               </div>
               <div className="mt-12">
                 <Link href="/about" className="inline-flex items-center gap-3 bg-vmgef-ink text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-vmgef-orange transition-colors duration-300 rounded-full">
@@ -400,62 +422,46 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
       <section className="py-24 bg-white border-t border-vmgef-ink/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16 text-center">
           <span className="fade-up text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-4 block">Our Network</span>
-          <h2 className="fade-up font-serif text-4xl text-vmgef-ink">Trusted Partners & Affiliates</h2>
+          <h2 className="fade-up font-serif text-4xl text-vmgef-ink">
+            {homePageData?.partners?.title || "Trusted Partners & Affiliates"}
+          </h2>
         </div>
         
         <div className="relative w-full flex overflow-x-hidden">
           <div className="animate-marquee whitespace-nowrap flex items-center gap-16 md:gap-32 py-4">
             {/* First set of logos/names */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">UEW</span>
+            {(homePageData?.partners?.partnerNames || [
+              "Univ. of Education, Winneba",
+              "Elhmurst Independent Nursery",
+              "Upward Motion Foundation",
+              "Jabony Fountain Foundation"
+            ]).map((partner: string, i: number) => (
+              <div key={i} className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
+                  <span className="font-serif font-bold text-vmgef-ink">
+                    {partner.split(' ').map(w => w[0]).join('').substring(0, 3).toUpperCase()}
+                  </span>
+                </div>
+                <span className="font-serif text-xl text-vmgef-ink-light">{partner}</span>
               </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Univ. of Education, Winneba</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">EIN</span>
-              </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Elhmurst Independent Nursery</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">UMF</span>
-              </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Upward Motion Foundation</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">JFF</span>
-              </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Jabony Fountain Foundation</span>
-            </div>
+            ))}
             
             {/* Duplicate set for seamless infinite scroll */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">UEW</span>
+            {(homePageData?.partners?.partnerNames || [
+              "Univ. of Education, Winneba",
+              "Elhmurst Independent Nursery",
+              "Upward Motion Foundation",
+              "Jabony Fountain Foundation"
+            ]).map((partner: string, i: number) => (
+              <div key={`dup-${i}`} className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
+                  <span className="font-serif font-bold text-vmgef-ink">
+                    {partner.split(' ').map(w => w[0]).join('').substring(0, 3).toUpperCase()}
+                  </span>
+                </div>
+                <span className="font-serif text-xl text-vmgef-ink-light">{partner}</span>
               </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Univ. of Education, Winneba</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">EIN</span>
-              </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Elhmurst Independent Nursery</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">UMF</span>
-              </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Upward Motion Foundation</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-vmgef-bg rounded-full flex items-center justify-center">
-                <span className="font-serif font-bold text-vmgef-ink">JFF</span>
-              </div>
-              <span className="font-serif text-xl text-vmgef-ink-light">Jabony Fountain Foundation</span>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -464,11 +470,11 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
       <section className="py-24 bg-vmgef-ink text-white border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-white/20">
-            {[
+            {(homePageData?.impactStats || [
               { number: "14", label: "Week Entrepreneurship Course", sub: "Building an Entrepreneur (BAE)" },
               { number: "4", label: "Year STEM Scholarships", sub: "Partnering with Univ. of Education, Winneba" },
               { number: "7", label: "Room Rural Clinic Outfitted", sub: "Mpatase Clinic Equipment Drive" }
-            ].map((stat, i) => (
+            ]).map((stat: any, i: number) => (
               <div 
                 key={i}
                 className="fade-up flex flex-col items-center text-center pt-8 md:pt-0 px-4"
@@ -577,16 +583,18 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
       {/* FINAL CTA */}
       <section className="py-32 bg-vmgef-orange text-white text-center">
         <div className="fade-up max-w-4xl mx-auto px-6">
-          <h2 className="font-serif text-5xl md:text-7xl mb-8">Ready to make an impact?</h2>
+          <h2 className="font-serif text-5xl md:text-7xl mb-8">
+            {homePageData?.finalCta?.title || "Ready to make an impact?"}
+          </h2>
           <p className="text-xl font-light mb-12 opacity-90">
-            Join us in empowering the next generation of Ghanaian leaders, entrepreneurs, and innovators.
+            {homePageData?.finalCta?.description || "Join us in empowering the next generation of Ghanaian leaders, entrepreneurs, and innovators."}
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link 
-              href="/donate" 
+              href={homePageData?.finalCta?.buttonLink || "/donate"} 
               className="bg-white text-vmgef-orange px-10 py-5 text-sm tracking-[0.2em] uppercase font-bold hover:bg-vmgef-ink hover:text-white transition-all duration-500 rounded-full"
             >
-              Donate Now
+              {homePageData?.finalCta?.buttonText || "Donate Now"}
             </Link>
             <Link 
               href="/donate" 
