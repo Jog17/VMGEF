@@ -8,7 +8,13 @@ import { CreditCard, Smartphone, HeartHandshake, Mail, Phone, MapPin } from "luc
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Donate() {
+import { urlForImage } from "@/sanity/lib/image";
+
+interface DonateProps {
+  donatePageData?: any;
+}
+
+export default function Donate({ donatePageData }: DonateProps) {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -53,21 +59,39 @@ export default function Donate() {
       {/* HERO SECTION */}
       <section className="parallax-container relative max-w-7xl mx-auto px-6 md:px-12 mb-20 text-center overflow-hidden rounded-3xl py-24">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/vmgef_pics/IMG-20251127-WA0069.jpg" 
-            alt="Donate Hero" 
-            className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
-            referrerPolicy="no-referrer"
-          />
+          {donatePageData?.hero?.image ? (
+            <img 
+              src={urlForImage(donatePageData.hero.image)?.url() || ""} 
+              alt="Donate Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+            />
+          ) : (
+            <img 
+              src="/vmgef_pics/IMG-20251127-WA0069.jpg" 
+              alt="Donate Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+              referrerPolicy="no-referrer"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-vmgef-bg via-vmgef-bg/80 to-vmgef-bg"></div>
         </div>
         <div className="relative z-10">
-          <span className="donate-hero text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">Take Action</span>
+          <span className="donate-hero text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">
+            {donatePageData?.hero?.subtitle || "Take Action"}
+          </span>
           <h1 className="donate-hero font-serif text-6xl md:text-8xl text-vmgef-ink leading-[1.1] tracking-tight mb-8">
-            Invest in the <span className="italic text-vmgef-orange">Future.</span>
+            {donatePageData?.hero?.titleLines ? (
+              <>
+                {donatePageData.hero.titleLines[0]} <span className="italic text-vmgef-orange">{donatePageData.hero.titleLines[1]}</span>
+              </>
+            ) : (
+              <>
+                Invest in the <span className="italic text-vmgef-orange">Future.</span>
+              </>
+            )}
           </h1>
           <p className="donate-hero text-xl text-vmgef-ink-light font-light leading-relaxed max-w-3xl mx-auto">
-            Your contribution directly funds STEM scholarships, rural clinics, entrepreneurship grants, and empowerment programs for Ghanaian youth and women.
+            {donatePageData?.hero?.description || "Your contribution directly funds STEM scholarships, rural clinics, entrepreneurship grants, and empowerment programs for Ghanaian youth and women."}
           </p>
         </div>
       </section>

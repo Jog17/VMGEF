@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export function Footer() {
+interface FooterProps {
+  siteSettings?: any;
+}
+
+export function Footer({ siteSettings }: FooterProps) {
   return (
     <footer className="bg-vmgef-ink text-white">
       {/* Newsletter Section - Clean and integrated */}
@@ -44,12 +48,12 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-white/70 max-w-sm font-light leading-relaxed mb-8">
-              Dedicated to the legacy of Vince. Empowering Ghanaian youth and women via education and skills training.
+              {siteSettings?.footerText || "Dedicated to the legacy of Vince. Empowering Ghanaian youth and women via education and skills training."}
             </p>
             <div className="flex flex-col gap-2 text-white/70 font-light">
-              <p>Weija, Accra, Ghana</p>
-              <p>WhatsApp: +233 50 8115 739</p>
-              <p>Email: info@vmgef.org</p>
+              <p>{siteSettings?.address || "Weija, Accra, Ghana"}</p>
+              <p>Phone: {siteSettings?.phoneNumber || "+233 50 8115 739"}</p>
+              <p>Email: {siteSettings?.contactEmail || "info@vmgef.org"}</p>
             </div>
           </div>
           

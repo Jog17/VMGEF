@@ -1,20 +1,22 @@
-"use client";
 
+"use client";
 import { useRef } from "react";
+import { Calendar, MapPin, ArrowRight, Star, Clock, Ticket } from "lucide-react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Calendar, MapPin, Clock, Ticket, Star } from "lucide-react";
-import { urlForImage } from "@/sanity/lib/image";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+import { urlForImage } from "@/sanity/lib/image";
 
 interface EventsProps {
   events: any[];
   featuredEvents: any[];
+  eventsPageData?: any;
 }
 
-export default function Events({ events, featuredEvents }: EventsProps) {
+export default function Events({ events, featuredEvents, eventsPageData }: EventsProps) {
   const container = useRef<HTMLDivElement>(null);
 
   const featured = featuredEvents && featuredEvents.length > 0 ? featuredEvents[0] : null;
@@ -61,21 +63,39 @@ export default function Events({ events, featuredEvents }: EventsProps) {
       {/* HERO SECTION */}
       <section className="parallax-container relative max-w-7xl mx-auto px-6 md:px-12 mb-24 text-center overflow-hidden rounded-3xl py-24">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
-            alt="Events Hero" 
-            className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
-            referrerPolicy="no-referrer"
-          />
+          {eventsPageData?.hero?.backgroundImage ? (
+            <img 
+              src={urlForImage(eventsPageData.hero.backgroundImage)?.url() || ""} 
+              alt="Events Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+            />
+          ) : (
+            <img 
+              src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
+              alt="Events Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+              referrerPolicy="no-referrer"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-vmgef-bg via-vmgef-bg/80 to-vmgef-bg"></div>
         </div>
         <div className="relative z-10 max-w-4xl mx-auto">
-          <span className="event-hero-text text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">Marquee Events</span>
+          <span className="event-hero-text text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">
+            {eventsPageData?.hero?.subtitle || "Marquee Events"}
+          </span>
           <h1 className="event-hero-text font-serif text-6xl md:text-8xl text-vmgef-ink leading-[1.1] tracking-tight mb-8">
-            A Night of <span className="italic text-vmgef-orange">Impact.</span>
+            {eventsPageData?.hero?.titleLines ? (
+              <>
+                {eventsPageData.hero.titleLines[0]} <span className="italic text-vmgef-orange">{eventsPageData.hero.titleLines[1]}</span>
+              </>
+            ) : (
+              <>
+                A Night of <span className="italic text-vmgef-orange">Impact.</span>
+              </>
+            )}
           </h1>
           <p className="event-hero-text text-xl text-vmgef-ink-light font-light leading-relaxed">
-            Join us for our annual black-tie fundraising galas. Celebrate art, excellence, and the empowerment of Ghanaian youth.
+            {eventsPageData?.hero?.description || "Join us for our annual black-tie fundraising galas. Celebrate art, excellence, and the empowerment of Ghanaian youth."}
           </p>
         </div>
       </section>
@@ -163,8 +183,12 @@ export default function Events({ events, featuredEvents }: EventsProps) {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="fade-up mb-16">
-            <h2 className="font-serif text-4xl md:text-5xl text-vmgef-ink mb-4">Community & Past Events</h2>
-            <p className="text-xl text-vmgef-ink-light font-light">Beyond the gala, we are active in the community year-round.</p>
+            <h2 className="font-serif text-4xl md:text-5xl text-vmgef-ink mb-4">
+              {eventsPageData?.communityEvents?.title || "Community & Past Events"}
+            </h2>
+            <p className="text-xl text-vmgef-ink-light font-light">
+              {eventsPageData?.communityEvents?.subtitle || "Beyond the gala, we are active in the community year-round."}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

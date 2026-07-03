@@ -1,14 +1,15 @@
-"use client";
 
+"use client";
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { BookOpen, Heart, Stethoscope, GraduationCap, Leaf, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { urlForImage } from "@/sanity/lib/image";
+import { BookOpen, Heart, Stethoscope, GraduationCap, Leaf, ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+import { urlForImage } from "@/sanity/lib/image";
 
 const fallbackPrograms = [
   {
@@ -65,9 +66,10 @@ const fallbackPrograms = [
 
 interface ProgramsProps {
   programs: any[];
+  programsPageData?: any;
 }
 
-export default function Programs({ programs }: ProgramsProps) {
+export default function Programs({ programs, programsPageData }: ProgramsProps) {
   const container = useRef<HTMLDivElement>(null);
   
   const displayPrograms = programs && programs.length > 0 ? programs.map((p, i) => ({
@@ -135,22 +137,41 @@ export default function Programs({ programs }: ProgramsProps) {
       {/* HERO SECTION */}
       <section className="parallax-container relative max-w-7xl mx-auto px-6 md:px-12 mb-24 text-center overflow-hidden rounded-3xl py-24">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/vmgef_pics/IMG-20251002-WA0038.jpg" 
-            alt="Programs Hero" 
-            className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
-            referrerPolicy="no-referrer"
-          />
+          {programsPageData?.hero?.image ? (
+            <img 
+              src={urlForImage(programsPageData.hero.image)?.url() || ""} 
+              alt="Programs Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+            />
+          ) : (
+            <img 
+              src="/vmgef_pics/IMG-20251002-WA0038.jpg" 
+              alt="Programs Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+              referrerPolicy="no-referrer"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-vmgef-bg via-vmgef-bg/80 to-vmgef-bg"></div>
         </div>
         <div className="relative z-10 max-w-4xl mx-auto">
-          <span className="prog-hero-text text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">Our Initiatives</span>
+          <span className="prog-hero-text text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">
+            {programsPageData?.hero?.subtitle || "Our Initiatives"}
+          </span>
           <h1 className="prog-hero-text font-serif text-6xl md:text-8xl text-vmgef-ink leading-[1.1] tracking-tight mb-8">
-            Education is <br />
-            <span className="italic text-vmgef-orange">My Superpower.</span>
+            {programsPageData?.hero?.titleLines ? (
+              <>
+                {programsPageData.hero.titleLines[0]} <br />
+                <span className="italic text-vmgef-orange">{programsPageData.hero.titleLines[1]}</span>
+              </>
+            ) : (
+              <>
+                Education is <br />
+                <span className="italic text-vmgef-orange">My Superpower.</span>
+              </>
+            )}
           </h1>
           <p className="prog-hero-text text-xl text-vmgef-ink-light font-light leading-relaxed">
-            From entrepreneurship and STEM to healthcare and urban farming, our programs are designed to increase skills, job readiness, and self-reliance in underserved communities.
+            {programsPageData?.hero?.description || "From entrepreneurship and STEM to healthcare and urban farming, our programs are designed to increase skills, job readiness, and self-reliance in underserved communities."}
           </p>
         </div>
       </section>

@@ -8,7 +8,13 @@ import { MapPin, Users, GraduationCap, Heart, TreePine } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Impact() {
+import { urlForImage } from "@/sanity/lib/image";
+
+interface ImpactProps {
+  impactPageData?: any;
+}
+
+export default function Impact({ impactPageData }: ImpactProps) {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -72,21 +78,39 @@ export default function Impact() {
       {/* HERO SECTION */}
       <section className="parallax-container relative max-w-7xl mx-auto px-6 md:px-12 mb-20 text-center overflow-hidden rounded-3xl py-24">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/vmgef_pics/IMG-20251002-WA0034.jpg" 
-            alt="Impact Hero" 
-            className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
-            referrerPolicy="no-referrer"
-          />
+          {impactPageData?.hero?.image ? (
+            <img 
+              src={urlForImage(impactPageData.hero.image)?.url() || ""} 
+              alt="Impact Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+            />
+          ) : (
+            <img 
+              src="/vmgef_pics/IMG-20251002-WA0034.jpg" 
+              alt="Impact Hero" 
+              className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-20"
+              referrerPolicy="no-referrer"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-vmgef-bg via-vmgef-bg/80 to-vmgef-bg"></div>
         </div>
         <div className="relative z-10">
-          <span className="impact-hero text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">Our Impact</span>
+          <span className="impact-hero text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-6 block">
+            {impactPageData?.hero?.subtitle || "Our Impact"}
+          </span>
           <h1 className="impact-hero font-serif text-6xl md:text-8xl text-vmgef-ink leading-[1.1] tracking-tight mb-8">
-            Measuring <span className="italic text-vmgef-orange">Change.</span>
+            {impactPageData?.hero?.titleLines ? (
+              <>
+                {impactPageData.hero.titleLines[0]} <span className="italic text-vmgef-orange">{impactPageData.hero.titleLines[1]}</span>
+              </>
+            ) : (
+              <>
+                Measuring <span className="italic text-vmgef-orange">Change.</span>
+              </>
+            )}
           </h1>
           <p className="impact-hero text-xl text-vmgef-ink-light font-light leading-relaxed max-w-3xl mx-auto">
-            We believe in transparency and tangible results. Here is a look at how your support is transforming lives across Ghana and beyond.
+            {impactPageData?.hero?.description || "We believe in transparency and tangible results. Here is a look at how your support is transforming lives across Ghana and beyond."}
           </p>
         </div>
       </section>

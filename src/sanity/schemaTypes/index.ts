@@ -6,7 +6,12 @@ import { teamMemberType } from './teamMemberType'
 import { homePageType } from './homePageType'
 import { aboutPageType } from './aboutPageType'
 import { siteSettingsType } from './siteSettingsType'
+import { programsPageType } from './programsPageType'
+import { eventsPageType } from './eventsPageType'
+import { impactPageType } from './impactPageType'
+import { donatePageType } from './donatePageType'
+
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [programType, eventType, testimonialType, teamMemberType, homePageType, aboutPageType, siteSettingsType],
+  types: [programType, eventType, testimonialType, teamMemberType, homePageType, aboutPageType, siteSettingsType, programsPageType, eventsPageType, impactPageType, donatePageType],
 }

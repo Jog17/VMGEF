@@ -72,3 +72,53 @@ export async function getAboutPage() {
     return null;
   }
 }
+
+export async function getSiteSettings() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "siteSettings"][0]`)
+  } catch (error) {
+    console.error("Error fetching site settings:", error);
+    return null;
+  }
+}
+
+export async function getProgramsPage() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "programsPage"][0]`)
+  } catch (error) {
+    console.error("Error fetching programs page:", error);
+    return null;
+  }
+}
+
+export async function getEventsPage() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "eventsPage"][0]`)
+  } catch (error) {
+    console.error("Error fetching events page:", error);
+    return null;
+  }
+}
+
+export async function getImpactPage() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "impactPage"][0]`)
+  } catch (error) {
+    console.error("Error fetching impact page:", error);
+    return null;
+  }
+}
+
+export async function getDonatePage() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "donatePage"][0]`)
+  } catch (error) {
+    console.error("Error fetching donate page:", error);
+    return null;
+  }
+}

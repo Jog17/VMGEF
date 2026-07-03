@@ -1,19 +1,22 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { getSiteSettings } from "@/sanity/lib/queries";
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const siteSettings = await getSiteSettings();
+
   return (
     <SmoothScroll>
       <Navbar />
       <div className="flex-grow">
         {children}
       </div>
-      <Footer />
+      <Footer siteSettings={siteSettings} />
     </SmoothScroll>
   );
 }
