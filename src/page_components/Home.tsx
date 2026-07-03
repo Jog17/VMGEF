@@ -189,6 +189,7 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
           <div className="featured-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {(homePageData?.featuredInitiatives || [
               {
+                _type: 'customInitiative',
                 title: 'Confident Girls Bright Futures Tanzania School Tour',
                 subtitle: 'March Event',
                 description: 'Click to learn more about the project and ways to donate.',
@@ -196,6 +197,7 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
                 fallbackImage: '/vmgef_pics/IMG-20251127-WA0065.jpg'
               },
               {
+                _type: 'customInitiative',
                 title: 'Our 2025\nImpact',
                 subtitle: 'Year in Review',
                 description: 'See the tangible difference we are making this year.',
@@ -203,6 +205,7 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
                 fallbackImage: '/vmgef_pics/IMG-20251002-WA0034.jpg'
               },
               {
+                _type: 'customInitiative',
                 title: '3rd Annual Gala\nJoin Us',
                 subtitle: 'July 25',
                 description: 'Save the date for an unforgettable evening of celebration.',
@@ -210,30 +213,45 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
                 fallbackImage: '/vmgef_pics/IMG-20251002-WA0052.jpg'
               },
               {
+                _type: 'customInitiative',
                 title: 'Building an Entrepreneur',
                 subtitle: 'Senior High Program',
                 description: 'Click for program explanation and Google link to register your school.',
                 link: '/programs',
                 fallbackImage: '/vmgef_pics/IMG-20251002-WA0038.jpg'
               }
-            ]).map((item: any, i: number) => (
-              <Link key={i} href={item.link || '#'} className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
-                {item.image ? (
-                  <img src={urlForImage(item.image)?.url() || ""} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
-                ) : (
-                  <img src={item.fallbackImage || "/vmgef_pics/IMG-20251127-WA0065.jpg"} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-                <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                  <div className={`w-12 h-12 ${i % 2 === 0 ? 'bg-vmgef-orange' : 'bg-white'} rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100`}>
-                    <ArrowRight size={20} className={i % 2 === 0 ? 'text-white' : 'text-vmgef-ink'} />
+            ]).map((item: any, i: number) => {
+              const isEvent = item._type === 'event';
+              const isProgram = item._type === 'program';
+              
+              const title = item.title;
+              const subtitle = isEvent ? (item.date ? new Date(item.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric' }) : 'Upcoming Event') :
+                               isProgram ? 'Program' :
+                               item.subtitle;
+              const description = item.description;
+              const link = isEvent ? '/events' :
+                           isProgram ? '/programs' :
+                           (item.link || '#');
+
+              return (
+                <Link key={i} href={link} className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
+                  {item.image ? (
+                    <img src={urlForImage(item.image)?.url() || ""} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+                  ) : (
+                    <img src={item.fallbackImage || "/vmgef_pics/IMG-20251127-WA0065.jpg"} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                  <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <div className={`w-12 h-12 ${i % 2 === 0 ? 'bg-vmgef-orange' : 'bg-white'} rounded-full flex items-center justify-center mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100`}>
+                      <ArrowRight size={20} className={i % 2 === 0 ? 'text-white' : 'text-vmgef-ink'} />
+                    </div>
+                    <span className={`${i % 2 === 0 ? 'text-vmgef-orange' : 'text-white/70'} text-xs font-bold tracking-widest uppercase mb-3 block`}>{subtitle}</span>
+                    <h3 className="font-serif text-3xl mb-4 leading-tight whitespace-pre-line">{title}</h3>
+                    <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">{description}</p>
                   </div>
-                  <span className={`${i % 2 === 0 ? 'text-vmgef-orange' : 'text-white/70'} text-xs font-bold tracking-widest uppercase mb-3 block`}>{item.subtitle}</span>
-                  <h3 className="font-serif text-3xl mb-4 leading-tight whitespace-pre-line">{item.title}</h3>
-                  <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">{item.description}</p>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

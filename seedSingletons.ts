@@ -36,13 +36,12 @@ async function seedSingletons() {
     featuredInitiatives: [
       {
         _key: 'fi1',
-        title: 'Confident Girls Bright Futures Tanzania School Tour',
-        subtitle: 'March Event',
-        description: 'Click to learn more about the project and ways to donate.',
-        link: '/events',
+        _type: 'reference',
+        _ref: 'event-gala-2nd'
       },
       {
         _key: 'fi2',
+        _type: 'customInitiative',
         title: 'Our 2025\nImpact',
         subtitle: 'Year in Review',
         description: 'See the tangible difference we are making this year.',
@@ -50,16 +49,15 @@ async function seedSingletons() {
       },
       {
         _key: 'fi3',
-        title: '3rd Annual VMGEF Fundraising Gala',
-        subtitle: 'July 25',
-        description: 'Join us for a night of excellence and impact in Accra.',
-        link: '/events',
+        _type: 'reference',
+        _ref: 'event-gala-1st'
       },
       {
         _key: 'fi4',
+        _type: 'customInitiative',
         title: 'Building an Entrepreneur',
-        subtitle: 'Flagship Program',
-        description: 'Our 14-week course transforming high school students into business leaders.',
+        subtitle: 'Senior High Program',
+        description: 'Click for program explanation and Google link to register your school.',
         link: '/programs',
       }
     ],

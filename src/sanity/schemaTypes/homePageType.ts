@@ -66,7 +66,14 @@ export const homePageType = defineType({
       type: 'array',
       of: [
         {
+          type: 'reference',
+          title: 'Reference (Event or Program)',
+          to: [{ type: 'event' }, { type: 'program' }]
+        },
+        {
           type: 'object',
+          name: 'customInitiative',
+          title: 'Custom Initiative',
           fields: [
             defineField({ name: 'title', title: 'Title', type: 'string' }),
             defineField({ name: 'subtitle', title: 'Subtitle', type: 'string' }),

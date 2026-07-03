@@ -56,7 +56,13 @@ export async function getTeamMembers() {
 export async function getHomePage() {
   if (!isConfigured) return null;
   try {
-    return await client.fetch(`*[_type == "homePage"][0]`)
+    return await client.fetch(`*[_type == "homePage"][0] {
+      ...,
+      featuredInitiatives[] {
+        _type == 'reference' => @->,
+        _type != 'reference' => @
+      }
+    }`)
   } catch (error) {
     console.error("Error fetching home page:", error);
     return null;
