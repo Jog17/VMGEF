@@ -131,28 +131,17 @@ export default function Donate({ donatePageData }: DonateProps) {
                   <h3 className="font-serif text-2xl mb-2">{donatePageData?.donationOptions?.online?.title || "Online Donation"}</h3>
                   <p className="text-white/70 font-light mb-8">{donatePageData?.donationOptions?.online?.description || "Securely donate from anywhere in the world using your credit or debit card."}</p>
                   
-                  {donatePageData?.donationOptions?.online?.donorboxUrl ? (
-                    <div className="w-full bg-white rounded-xl overflow-hidden min-h-[400px]">
-                      <iframe 
-                        src={donatePageData.donationOptions.online.donorboxUrl} 
-                        name="donorbox" 
-                        allow="payment"
-                        frameBorder="0" 
-                        scrolling="no" 
-                        className="w-full h-[600px] md:h-[900px]"
-                        style={{ maxWidth: '100%', minWidth: '250px', maxHeight: 'none' }}
-                      ></iframe>
-                    </div>
-                  ) : (
-                    <a 
-                      href={donatePageData?.donationOptions?.online?.buttonLink || "https://donorbox.org/events/728823/steps/choose_tickets"} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="inline-block bg-vmgef-orange text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-white hover:text-vmgef-ink transition-colors duration-300 rounded-full"
-                    >
-                      {donatePageData?.donationOptions?.online?.buttonText || "Donate via Donorbox"}
-                    </a>
-                  )}
+                  <div className="w-full bg-white rounded-xl overflow-hidden min-h-[400px]">
+                    <iframe 
+                      src={donatePageData?.donationOptions?.online?.donorboxUrl || "https://donorbox.org/embed/5k-walk-run-for-confident-girls-bright-futures-tanzania-school-tour"} 
+                      name="donorbox" 
+                      allow="payment"
+                      frameBorder="0" 
+                      scrolling="no" 
+                      className="w-full h-[600px] md:h-[900px]"
+                      style={{ maxWidth: '100%', minWidth: '250px', maxHeight: 'none' }}
+                    ></iframe>
+                  </div>
                 </div>
               </div>
             </div>

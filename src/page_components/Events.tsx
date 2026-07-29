@@ -124,7 +124,7 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
                 </div>
                 <div className="flex items-center gap-4 text-white/80">
                   <Clock className="text-vmgef-orange" size={24} />
-                  <span className="text-lg font-light">4:00 PM - 8:00 PM Prompt</span>
+                  <span className="text-lg font-light">{featured?.time || "4:00 PM - 8:00 PM Prompt"}</span>
                 </div>
                 <div className="flex items-center gap-4 text-white/80">
                   <MapPin className="text-vmgef-orange" size={24} />
@@ -135,10 +135,18 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
               <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm">
                 <h3 className="font-serif text-2xl mb-6 text-vmgef-orange">Event Schedule</h3>
                 <ul className="space-y-3 text-white/80 font-light">
-                  <li>• VIP Art & Wine Reception</li>
-                  <li>• Live Band Entertainment</li>
-                  <li>• Impact Report & Mini Documentary</li>
-                  <li>• Dinner & NGO Impact Awards</li>
+                  {featured?.schedule?.length > 0 ? (
+                    featured.schedule.map((item: string, i: number) => (
+                      <li key={i}>• {item}</li>
+                    ))
+                  ) : (
+                    <>
+                      <li>• VIP Art & Wine Reception</li>
+                      <li>• Live Band Entertainment</li>
+                      <li>• Impact Report & Mini Documentary</li>
+                      <li>• Dinner & NGO Impact Awards</li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
@@ -148,31 +156,31 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-4 bg-vmgef-ink rounded-b-full"></div>
               
               <div className="text-center mb-10">
-                <h3 className="font-serif text-3xl mb-2">Secure Your Seat</h3>
-                <p className="text-vmgef-ink-light font-light">Proceeds go directly to VMGEF programs</p>
+                <h3 className="font-serif text-3xl mb-2">{featured?.tickets?.title || "Secure Your Seat"}</h3>
+                <p className="text-vmgef-ink-light font-light">{featured?.tickets?.subtitle || "Proceeds go directly to VMGEF programs"}</p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 mb-10">
                 <div className="flex-1 border border-vmgef-ink/10 p-6 text-center hover:border-vmgef-orange transition-colors rounded-2xl">
                   <span className="block text-sm tracking-widest uppercase text-vmgef-ink-light mb-2">Regular</span>
-                  <span className="font-serif text-4xl text-vmgef-orange">700<span className="text-xl">GHC</span></span>
+                  <span className="font-serif text-4xl text-vmgef-orange">{featured?.tickets?.regularPrice || "700"}<span className="text-xl">GHC</span></span>
                 </div>
                 <div className="flex-1 bg-vmgef-ink text-white p-6 text-center relative overflow-hidden rounded-2xl">
                   <div className="absolute top-0 right-0 bg-vmgef-orange text-white text-[10px] font-bold uppercase tracking-widest py-1 px-3 transform translate-x-4 translate-y-2 rotate-45">VIP</div>
                   <span className="block text-sm tracking-widest uppercase text-white/70 mb-2">VIP Access</span>
-                  <span className="font-serif text-4xl text-vmgef-orange">1300<span className="text-xl">GHC</span></span>
+                  <span className="font-serif text-4xl text-vmgef-orange">{featured?.tickets?.vipPrice || "1300"}<span className="text-xl">GHC</span></span>
                 </div>
               </div>
 
               <div className="bg-vmgef-bg p-6 text-center mb-8 rounded-2xl">
                 <span className="block text-sm uppercase tracking-widest text-vmgef-ink-light mb-2">Short Code for Payment</span>
-                <span className="font-mono text-3xl font-bold text-vmgef-ink">*713*33*813#</span>
+                <span className="font-mono text-3xl font-bold text-vmgef-ink">{featured?.tickets?.paymentShortCode || "*713*33*813#"}</span>
               </div>
 
               <div className="text-center">
                 <p className="text-sm text-vmgef-ink-light font-light mb-2">For sponsorships and inquiries:</p>
-                <p className="font-medium">+233 20 0640 740 | +233 50 8115 739</p>
-                <p className="font-medium">info@vmgef.org</p>
+                <p className="font-medium">{featured?.tickets?.inquiriesPhone || "+233 20 0640 740 | +233 50 8115 739"}</p>
+                <p className="font-medium">{featured?.tickets?.inquiriesEmail || "info@vmgef.org"}</p>
               </div>
             </div>
           </div>
