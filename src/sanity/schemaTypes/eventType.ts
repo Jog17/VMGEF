@@ -9,7 +9,7 @@ export const eventType = defineType({
     defineField({ name: 'date', title: 'Date', type: 'datetime' }),
     defineField({ name: 'time', title: 'Time', type: 'string', description: 'e.g. 4:00 PM - 8:00 PM Prompt' }),
     defineField({ name: 'location', title: 'Location', type: 'string' }),
-    defineField({ name: 'description', title: 'Description', type: 'text' }),
+    defineField({ name: 'description', title: 'Description', type: 'array', of: [{ type: 'block' }] }),
     defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'isFeatured', title: 'Featured Event', type: 'boolean' }),
     defineField({

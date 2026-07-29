@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { PortableText } from "@portabletext/react";
 import { urlForImage } from "@/sanity/lib/image";
 
 interface EventsProps {
@@ -113,9 +114,9 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
                 <Star size={14} /> {featured && featured.date && new Date(featured.date) > new Date() ? "Upcoming Event" : "Featured Event"}
               </div>
               <h2 className="font-serif text-5xl md:text-7xl mb-6">{featured ? featured.title : "2nd Annual Gala"}</h2>
-              <p className="text-2xl font-light text-white/80 mb-8 italic">
-                "{featured ? featured.description : "Honoring Women Making an Impact in the Community"}"
-              </p>
+              <div className="text-2xl font-light text-white/80 mb-8 italic prose prose-invert prose-p:my-0 prose-p:inline">
+                "{featured ? (Array.isArray(featured.description) ? <PortableText value={featured.description} /> : featured.description) : "Honoring Women Making an Impact in the Community"}"
+              </div>
               
               <div className="space-y-6 mb-12">
                 <div className="flex items-center gap-4 text-white/80">
@@ -151,22 +152,11 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
               </div>
             </div>
 
-            {/* EVENT IMAGE & TICKET CARD */}
-            <div className="flex flex-col gap-8">
-              {featured?.image && (
-                <div className="fade-up rounded-3xl overflow-hidden shadow-2xl relative">
-                  <img 
-                    src={urlForImage(featured.image)?.url() || ""} 
-                    alt={featured.title} 
-                    className="w-full h-auto object-cover max-h-[400px]"
-                  />
-                </div>
-              )}
+            {/* TICKET CARD */}
+            <div className="fade-up bg-white text-vmgef-ink p-10 shadow-2xl relative rounded-3xl">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-4 bg-vmgef-ink rounded-b-full"></div>
               
-              <div className="fade-up bg-white text-vmgef-ink p-10 shadow-2xl relative rounded-3xl">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-4 bg-vmgef-ink rounded-b-full"></div>
-                
-                <div className="text-center mb-10">
+              <div className="text-center mb-10">
                 <h3 className="font-serif text-3xl mb-2">{featured?.tickets?.title || "Secure Your Seat"}</h3>
                 <p className="text-vmgef-ink-light font-light">{featured?.tickets?.subtitle || "Proceeds go directly to VMGEF programs"}</p>
               </div>
@@ -213,31 +203,20 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {events && events.length > 0 ? (
               events.filter(e => !e.isFeatured).map((event: any, idx: number) => (
-                <div key={event._id || idx} className={`fade-up border border-vmgef-ink/10 overflow-hidden hover:shadow-xl transition-shadow duration-500 rounded-3xl ${new Date(event.date) > new Date() ? 'bg-vmgef-bg border-vmgef-orange/20' : ''}`}>
-                  {event.image && (
-                    <div className="w-full h-48 sm:h-64 overflow-hidden bg-vmgef-ink/5">
-                      <img 
-                        src={urlForImage(event.image)?.url() || ""} 
-                        alt={event.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                      />
-                    </div>
-                  )}
-                  <div className="p-8">
-                    <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-4 block">
-                      {new Date(event.date) > new Date() ? "Upcoming • " : ""}
-                      {new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
-                    </span>
-                    <h3 className="font-serif text-2xl text-vmgef-ink mb-4">{event.title}</h3>
-                    <p className="text-vmgef-ink-light font-light mb-6">{event.description}</p>
-                    <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
-                      {event.location.toLowerCase().includes('online') ? (
-                        <Ticket size={16} className="text-vmgef-orange" />
-                      ) : (
-                        <MapPin size={16} className="text-vmgef-orange" />
-                      )} 
-                      {event.location}
-                    </div>
+                <div key={event._id || idx} className={`fade-up border border-vmgef-ink/10 p-8 hover:shadow-xl transition-shadow duration-500 rounded-3xl ${new Date(event.date) > new Date() ? 'bg-vmgef-bg border-vmgef-orange/20' : ''}`}>
+                  <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-4 block">
+                    {new Date(event.date) > new Date() ? "Upcoming • " : ""}
+                    {new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </span>
+                  <h3 className="font-serif text-2xl text-vmgef-ink mb-4">{event.title}</h3>
+                  <div className="text-vmgef-ink-light font-light mb-6 prose prose-vmgef prose-sm">{Array.isArray(event.description) ? <PortableText value={event.description} /> : event.description}</div>
+                  <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
+                    {event.location.toLowerCase().includes('online') ? (
+                      <Ticket size={16} className="text-vmgef-orange" />
+                    ) : (
+                      <MapPin size={16} className="text-vmgef-orange" />
+                    )} 
+                    {event.location}
                   </div>
                 </div>
               ))

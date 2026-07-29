@@ -6,6 +6,7 @@ import { ArrowRight, Heart, BookOpen, Stethoscope, GraduationCap, Leaf, Play } f
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { PortableText } from "@portabletext/react";
 import { urlForImage } from "@/sanity/lib/image";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -568,7 +569,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                           {event.isFeatured ? 'Featured' : 'Community'}
                         </span>
                         <h3 className="font-serif text-3xl md:text-4xl mb-2">{event.title}</h3>
-                        <p className={`font-light ${index === 0 ? 'text-white/80' : 'text-vmgef-ink-light'}`}>{event.description}</p>
+                        <div className={`font-light prose prose-sm ${index === 0 ? "text-white/80 prose-invert" : "text-vmgef-ink-light"}`}>{Array.isArray(event.description) ? <PortableText value={event.description} /> : event.description}</div>
                       </div>
                       <div className={`flex items-center justify-between border-t pt-6 mt-auto ${index === 0 ? 'border-white/20' : 'border-vmgef-ink/10'}`}>
                         <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">
