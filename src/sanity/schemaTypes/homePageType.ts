@@ -92,6 +92,7 @@ export const homePageType = defineType({
         defineField({ name: 'subtitle', title: 'Subtitle', type: 'string' }),
         defineField({ name: 'title', title: 'Title', type: 'string' }),
         defineField({ name: 'thumbnail', title: 'Thumbnail', type: 'image', options: { hotspot: true } }),
+        defineField({ name: 'videoFile', title: 'Video File', type: 'file', options: { accept: 'video/*' } }),
       ],
     }),
     defineField({

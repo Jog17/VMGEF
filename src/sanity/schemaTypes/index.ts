@@ -10,8 +10,8 @@ import { programsPageType } from './programsPageType'
 import { eventsPageType } from './eventsPageType'
 import { impactPageType } from './impactPageType'
 import { donatePageType } from './donatePageType'
-
+import { galleryPageType } from './galleryPageType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [programType, eventType, testimonialType, teamMemberType, homePageType, aboutPageType, siteSettingsType, programsPageType, eventsPageType, impactPageType, donatePageType],
+  types: [programType, eventType, testimonialType, teamMemberType, homePageType, aboutPageType, siteSettingsType, programsPageType, eventsPageType, impactPageType, donatePageType, galleryPageType],
 }

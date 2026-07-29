@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Heart, BookOpen, Stethoscope, GraduationCap, Leaf, Play } from "lucide-react";
 import gsap from "gsap";
@@ -19,6 +19,7 @@ interface HomeProps {
 
 export default function Home({ programs, featuredEvents, testimonials, homePageData }: HomeProps) {
   const container = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useGSAP(() => {
     // Hero Animations
@@ -358,27 +359,45 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
             </h2>
           </div>
           
-          <div className="fade-up parallax-video-container relative w-full max-w-5xl mx-auto aspect-video bg-black group cursor-pointer overflow-hidden shadow-2xl rounded-3xl">
-            {/* Placeholder for actual video thumbnail */}
-            {homePageData?.videoSection?.thumbnail ? (
-              <img 
-                src={urlForImage(homePageData.videoSection.thumbnail)?.url() || ""} 
-                alt="Video Thumbnail" 
-                className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
+          <div 
+            className="fade-up parallax-video-container relative w-full max-w-5xl mx-auto aspect-video bg-black group cursor-pointer overflow-hidden shadow-2xl rounded-3xl"
+            onClick={() => {
+              if (homePageData?.videoSection?.videoUrl) {
+                setIsPlaying(true);
+              }
+            }}
+          >
+            {isPlaying && homePageData?.videoSection?.videoUrl ? (
+              <video 
+                src={homePageData.videoSection.videoUrl} 
+                controls 
+                autoPlay 
+                className="absolute inset-0 w-full h-full object-cover z-20"
               />
             ) : (
-              <img 
-                src="/vmgef_pics/IMG-20251127-WA0068.jpg" 
-                alt="Video Thumbnail" 
-                className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
-                referrerPolicy="no-referrer"
-              />
+              <>
+                {/* Placeholder for actual video thumbnail */}
+                {homePageData?.videoSection?.thumbnail ? (
+                  <img 
+                    src={urlForImage(homePageData.videoSection.thumbnail)?.url() || ""} 
+                    alt="Video Thumbnail" 
+                    className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
+                  />
+                ) : (
+                  <img 
+                    src="/vmgef_pics/IMG-20251127-WA0068.jpg" 
+                    alt="Video Thumbnail" 
+                    className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                )}
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  <div className="w-24 h-24 bg-vmgef-orange rounded-full flex items-center justify-center pl-2 shadow-[0_0_40px_rgba(255,99,33,0.4)] group-hover:scale-110 transition-transform duration-500">
+                    <Play size={40} className="text-white" />
+                  </div>
+                </div>
+              </>
             )}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 bg-vmgef-orange rounded-full flex items-center justify-center pl-2 shadow-[0_0_40px_rgba(255,99,33,0.4)] group-hover:scale-110 transition-transform duration-500">
-                <Play size={40} className="text-white" />
-              </div>
-            </div>
           </div>
         </div>
       </section>

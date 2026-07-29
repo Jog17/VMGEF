@@ -61,6 +61,10 @@ export async function getHomePage() {
       featuredInitiatives[] {
         _type == 'reference' => @->,
         _type != 'reference' => @
+      },
+      videoSection {
+        ...,
+        "videoUrl": videoFile.asset->url
       }
     }`)
   } catch (error) {
@@ -125,6 +129,16 @@ export async function getDonatePage() {
     return await client.fetch(`*[_type == "donatePage"][0]`)
   } catch (error) {
     console.error("Error fetching donate page:", error);
+    return null;
+  }
+}
+
+export async function getGalleryPage() {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(`*[_type == "galleryPage"][0]`)
+  } catch (error) {
+    console.error("Error fetching gallery page:", error);
     return null;
   }
 }
