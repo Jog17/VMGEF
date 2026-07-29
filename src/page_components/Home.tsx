@@ -168,17 +168,17 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
 
           <div className="flex flex-col sm:flex-row gap-6">
             <Link 
-              href="/programs" 
+              href={homePageData?.hero?.primaryButton?.link || "/programs"} 
               className="hero-btn group flex items-center justify-center gap-3 bg-vmgef-orange text-white px-10 py-5 text-sm tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-vmgef-ink transition-all duration-500 rounded-full"
             >
-              Our Programs
+              {homePageData?.hero?.primaryButton?.text || "Our Programs"}
               <ArrowRight size={18} className="transition-transform duration-500 group-hover:translate-x-2" />
             </Link>
             <Link 
-              href="/about" 
+              href={homePageData?.hero?.secondaryButton?.link || "/about"} 
               className="hero-btn group flex items-center justify-center gap-3 bg-transparent border border-white/30 text-white px-10 py-5 text-sm tracking-[0.2em] uppercase font-medium hover:bg-white hover:text-vmgef-ink transition-all duration-500 backdrop-blur-sm rounded-full"
             >
-              The Legacy
+              {homePageData?.hero?.secondaryButton?.text || "The Legacy"}
             </Link>
           </div>
         </div>

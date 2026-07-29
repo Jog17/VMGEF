@@ -41,6 +41,24 @@ export const homePageType = defineType({
           description: 'Path to local video (e.g., /vmgef_pics/video.mp4) or an external link.',
           type: 'string',
         }),
+        defineField({
+          name: 'primaryButton',
+          title: 'Primary Button',
+          type: 'object',
+          fields: [
+            defineField({ name: 'text', title: 'Button Text', type: 'string', initialValue: 'Our Programs' }),
+            defineField({ name: 'link', title: 'Button Link', type: 'string', initialValue: '/programs' }),
+          ]
+        }),
+        defineField({
+          name: 'secondaryButton',
+          title: 'Secondary Button',
+          type: 'object',
+          fields: [
+            defineField({ name: 'text', title: 'Button Text', type: 'string', initialValue: 'The Legacy' }),
+            defineField({ name: 'link', title: 'Button Link', type: 'string', initialValue: '/about' }),
+          ]
+        }),
       ],
     }),
     defineField({
