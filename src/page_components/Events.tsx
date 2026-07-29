@@ -110,7 +110,7 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="fade-up">
               <div className="inline-flex items-center gap-2 px-4 py-2 border border-vmgef-orange/30 rounded-full text-vmgef-orange text-xs tracking-widest uppercase font-bold mb-8">
-                <Star size={14} /> Upcoming Event
+                <Star size={14} /> {featured && featured.date && new Date(featured.date) > new Date() ? "Upcoming Event" : "Featured Event"}
               </div>
               <h2 className="font-serif text-5xl md:text-7xl mb-6">{featured ? featured.title : "2nd Annual Gala"}</h2>
               <p className="text-2xl font-light text-white/80 mb-8 italic">

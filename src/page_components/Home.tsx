@@ -12,12 +12,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface HomeProps {
   programs: any[];
+  events?: any[];
   featuredEvents: any[];
   testimonials: any[];
   homePageData?: any;
 }
 
-export default function Home({ programs, featuredEvents, testimonials, homePageData }: HomeProps) {
+export default function Home({ programs, events = [], featuredEvents, testimonials, homePageData }: HomeProps) {
   const container = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -199,7 +200,7 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
                 const isProgram = item._type === 'program';
                 
                 const title = item.title;
-                const subtitle = isEvent ? (item.date ? new Date(item.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric' }) : 'Upcoming Event') :
+                const subtitle = isEvent ? (item.date ? new Date(item.date).toLocaleDateString(undefined, { month: 'long', day: 'numeric' }) : 'Event') :
                                  isProgram ? 'Program' :
                                  item.subtitle;
                 const description = item.description;
@@ -500,66 +501,63 @@ export default function Home({ programs, featuredEvents, testimonials, homePageD
       </section>
 
       {/* UPCOMING EVENTS PREVIEW */}
-      <section className="py-24 bg-vmgef-bg relative">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="fade-up flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <div>
-              <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-4 block">Join Us</span>
-              <h2 className="font-serif text-4xl md:text-5xl text-vmgef-ink leading-tight">
-                Upcoming Events
-              </h2>
-            </div>
-            <Link href="/events" className="group flex items-center gap-2 text-vmgef-ink uppercase tracking-widest text-sm font-medium hover:text-vmgef-orange transition-colors pb-2 border-b border-vmgef-ink hover:border-vmgef-orange">
-              View All Events <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
+      {(() => {
+        const upcomingEvents = events.filter((e: any) => e.date && new Date(e.date) > new Date()).slice(0, 2);
+        
+        if (upcomingEvents.length === 0) return null;
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Featured Event */}
-            <div className="fade-up group relative overflow-hidden rounded-3xl bg-vmgef-ink text-white">
-              <div className="absolute inset-0 z-0">
-                <img 
-                  src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
-                  alt="Gala Event" 
-                  className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-vmgef-ink via-vmgef-ink/80 to-transparent"></div>
+        return (
+          <section className="py-24 bg-vmgef-bg relative">
+            <div className="max-w-7xl mx-auto px-6 md:px-12">
+              <div className="fade-up flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div>
+                  <span className="text-vmgef-orange tracking-[0.2em] uppercase text-sm font-semibold mb-4 block">Join Us</span>
+                  <h2 className="font-serif text-4xl md:text-5xl text-vmgef-ink leading-tight">
+                    Upcoming Events
+                  </h2>
+                </div>
+                <Link href="/events" className="group flex items-center gap-2 text-vmgef-ink uppercase tracking-widest text-sm font-medium hover:text-vmgef-orange transition-colors pb-2 border-b border-vmgef-ink hover:border-vmgef-orange">
+                  View All Events <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
-              <div className="relative z-10 p-10 h-full flex flex-col justify-end min-h-[400px]">
-                <div className="mb-6">
-                  <span className="inline-block bg-vmgef-orange text-white text-xs font-bold tracking-widest uppercase px-4 py-2 mb-4 rounded-full">Featured</span>
-                  <h3 className="font-serif text-3xl md:text-4xl mb-2">{featuredEvents && featuredEvents.length > 0 ? featuredEvents[0].title : "2nd Annual Gala"}</h3>
-                  <p className="text-white/80 font-light">{featuredEvents && featuredEvents.length > 0 ? featuredEvents[0].description : "A night of celebration, fundraising, and community impact."}</p>
-                </div>
-                <div className="flex items-center justify-between border-t border-white/20 pt-6 mt-auto">
-                  <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">{featuredEvents && featuredEvents.length > 0 ? featuredEvents[0].location : "Accra, Ghana"}</div>
-                  <Link href="/events" className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-vmgef-orange group-hover:border-vmgef-orange transition-colors">
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {upcomingEvents.map((event: any, index: number) => (
+                  <div key={event._id || index} className={`fade-up group relative overflow-hidden rounded-3xl text-white ${index === 0 ? 'bg-vmgef-ink' : 'bg-[#F4F1ED] text-vmgef-ink border border-vmgef-ink/10'}`}>
+                    {index === 0 && (
+                      <div className="absolute inset-0 z-0">
+                        <img 
+                          src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
+                          alt="Featured Event" 
+                          className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-vmgef-ink via-vmgef-ink/80 to-transparent"></div>
+                      </div>
+                    )}
+                    <div className={`relative z-10 p-10 h-full flex flex-col min-h-[400px] ${index === 0 ? 'justify-end' : ''}`}>
+                      <div className="mb-6">
+                        <span className={`inline-block text-xs font-bold tracking-widest uppercase px-4 py-2 mb-4 rounded-full ${index === 0 ? 'bg-vmgef-orange text-white' : 'border border-vmgef-ink/20 text-vmgef-ink-light'}`}>
+                          {event.isFeatured ? 'Featured' : 'Community'}
+                        </span>
+                        <h3 className="font-serif text-3xl md:text-4xl mb-2">{event.title}</h3>
+                        <p className={`font-light ${index === 0 ? 'text-white/80' : 'text-vmgef-ink-light'}`}>{event.description}</p>
+                      </div>
+                      <div className={`flex items-center justify-between border-t pt-6 mt-auto ${index === 0 ? 'border-white/20' : 'border-vmgef-ink/10'}`}>
+                        <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">
+                          {new Date(event.date).toLocaleDateString()}
+                        </div>
+                        <Link href="/events" className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${index === 0 ? 'border-white/30 group-hover:bg-vmgef-orange group-hover:border-vmgef-orange' : 'border-vmgef-ink/20 group-hover:bg-vmgef-ink group-hover:text-white'}`}>
+                          <ArrowRight size={18} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-
-            {/* Secondary Event */}
-            <div className="fade-up group relative overflow-hidden rounded-3xl bg-[#F4F1ED] text-vmgef-ink border border-vmgef-ink/10">
-              <div className="p-10 h-full flex flex-col min-h-[400px]">
-                <div className="mb-6">
-                  <span className="inline-block border border-vmgef-ink/20 text-vmgef-ink-light text-xs font-bold tracking-widest uppercase px-4 py-2 mb-4 rounded-full">Community</span>
-                  <h3 className="font-serif text-3xl md:text-4xl mb-2">{featuredEvents && featuredEvents.length > 1 ? featuredEvents[1].title : "BAE Pitch Competition"}</h3>
-                  <p className="text-vmgef-ink-light font-light">{featuredEvents && featuredEvents.length > 1 ? featuredEvents[1].description : "Watch our high school entrepreneurs pitch their business plans for a GHS 10,000 grant."}</p>
-                </div>
-                <div className="flex items-center justify-between border-t border-vmgef-ink/10 pt-6 mt-auto">
-                  <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">{featuredEvents && featuredEvents.length > 1 && featuredEvents[1].date ? new Date(featuredEvents[1].date).toLocaleDateString() : "Coming Soon"}</div>
-                  <Link href="/events" className="w-10 h-10 rounded-full border border-vmgef-ink/20 flex items-center justify-center group-hover:bg-vmgef-ink group-hover:text-white transition-colors">
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        );
+      })()}
 
       {/* VOICES OF IMPACT */}
       <section className="py-24 md:py-32 bg-white relative overflow-hidden">

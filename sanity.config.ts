@@ -6,7 +6,7 @@ import { schema } from './src/sanity/schemaTypes'
 const singletonActions = new Set(["publish", "discardChanges", "restore"])
 
 // Define the singleton document types
-const singletonTypes = new Set(["homePage", "aboutPage", "siteSettings", "programsPage", "eventsPage", "impactPage", "donatePage"])
+const singletonTypes = new Set(["homePage", "aboutPage", "siteSettings", "programsPage", "eventsPage", "impactPage", "donatePage", "galleryPage"])
 
 export default defineConfig({
   basePath: '/studio',
@@ -75,6 +75,14 @@ export default defineConfig({
                 S.document()
                   .schemaType("donatePage")
                   .documentId("donatePage")
+              ),
+            S.listItem()
+              .title("Gallery Page")
+              .id("galleryPage")
+              .child(
+                S.document()
+                  .schemaType("galleryPage")
+                  .documentId("galleryPage")
               ),
             // Regular document types
             S.documentTypeListItem("program").title("Programs"),
