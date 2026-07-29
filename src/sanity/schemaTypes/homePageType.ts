@@ -36,10 +36,18 @@ export const homePageType = defineType({
           type: 'text',
         }),
         defineField({
-          name: 'backgroundVideoUrl',
-          title: 'Background Video URL',
-          description: 'Path to local video (e.g., /vmgef_pics/video.mp4) or an external link.',
-          type: 'string',
+          name: 'backgroundVideo',
+          title: 'Background Video',
+          type: 'file',
+          options: { accept: 'video/*' },
+          description: 'Upload a background video. If not provided, the background image will be used.'
+        }),
+        defineField({
+          name: 'backgroundImage',
+          title: 'Background Image',
+          type: 'image',
+          options: { hotspot: true },
+          description: 'Upload a background image to use if no video is provided.'
         }),
         defineField({
           name: 'primaryButton',

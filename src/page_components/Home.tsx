@@ -127,17 +127,35 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
     <main ref={container} className="w-full min-h-screen bg-vmgef-bg overflow-hidden">
       {/* HERO SECTION */}
       <section className="relative w-full h-screen flex items-center justify-center pt-20">
-        {/* Background Video */}
+        {/* Background Media */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-vmgef-ink">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            className="w-full h-full object-cover opacity-40 scale-105"
-          >
-            <source src="/vmgef_pics/VID-20250425-WA0008.mp4" type="video/mp4" />
-          </video>
+          {homePageData?.hero?.backgroundVideoUrl ? (
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-full object-cover opacity-40 scale-105"
+            >
+              <source src={homePageData.hero.backgroundVideoUrl} type="video/mp4" />
+            </video>
+          ) : homePageData?.hero?.backgroundImage ? (
+            <img 
+              src={urlForImage(homePageData.hero.backgroundImage)?.url() || ""} 
+              alt="Hero Background" 
+              className="w-full h-full object-cover opacity-40 scale-105"
+            />
+          ) : (
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-full object-cover opacity-40 scale-105"
+            >
+              <source src="/vmgef_pics/VID-20250425-WA0008.mp4" type="video/mp4" />
+            </video>
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-vmgef-ink/60 via-vmgef-ink/40 to-vmgef-bg"></div>
         </div>
 

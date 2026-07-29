@@ -58,6 +58,10 @@ export async function getHomePage() {
   try {
     return await client.fetch(`*[_type == "homePage"][0] {
       ...,
+      hero {
+        ...,
+        "backgroundVideoUrl": backgroundVideo.asset->url
+      },
       featuredInitiatives[] {
         _type == 'reference' => @->,
         _type != 'reference' => @
