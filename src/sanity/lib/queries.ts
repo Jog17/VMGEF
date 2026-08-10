@@ -24,6 +24,20 @@ export async function getEvents() {
   }
 }
 
+export async function getEventBySlug(slug: string) {
+  if (!isConfigured) return null;
+  try {
+    return await client.fetch(
+      `*[_type == "event" && (slug.current == $slug || _id == $slug)][0]`,
+      { slug },
+      fetchOptions
+    );
+  } catch (error) {
+    console.error("Error fetching event by slug:", error);
+    return null;
+  }
+}
+
 export async function getFeaturedEvents() {
   if (!isConfigured) return [];
   try {

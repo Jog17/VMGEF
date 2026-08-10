@@ -574,7 +574,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                         <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">
                           {new Date(event.date).toLocaleDateString()}
                         </div>
-                        <Link href="/events" className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${index === 0 ? 'border-white/30 group-hover:bg-vmgef-orange group-hover:border-vmgef-orange' : 'border-vmgef-ink/20 group-hover:bg-vmgef-ink group-hover:text-white'}`}>
+                        <Link href={`/events/${event.slug?.current || event._id}`} className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${index === 0 ? 'border-white/30 group-hover:bg-vmgef-orange group-hover:border-vmgef-orange' : 'border-vmgef-ink/20 group-hover:bg-vmgef-ink group-hover:text-white'}`}>
                           <ArrowRight size={18} />
                         </Link>
                       </div>

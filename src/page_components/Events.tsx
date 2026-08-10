@@ -1,6 +1,7 @@
 
 "use client";
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { Calendar, MapPin, ArrowRight, Star, Clock, Ticket, User, Mail, Phone, Users, CheckCircle2, X, ExternalLink } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -181,29 +182,39 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
                 </ul>
               </div>
 
-              {(featured?.requiresRegistration || featured?.registrationUrl) && (
-                <div>
-                  {featured.registrationType === 'external' && featured.registrationUrl ? (
-                    <a
-                      href={featured.registrationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 bg-vmgef-orange hover:bg-vmgef-orange-dark text-white font-medium px-8 py-4 rounded-full transition-colors shadow-lg"
-                    >
-                      <span>{featured.registrationButtonText || "Register for Event"}</span>
-                      <ExternalLink size={18} />
-                    </a>
-                  ) : (
-                    <button
-                      onClick={() => handleOpenRegistration(featured)}
-                      className="inline-flex items-center gap-3 bg-vmgef-orange hover:bg-vmgef-orange-dark text-white font-medium px-8 py-4 rounded-full transition-colors shadow-lg cursor-pointer"
-                    >
-                      <span>{featured.registrationButtonText || "Register / RSVP Now"}</span>
-                      <ArrowRight size={18} />
-                    </button>
-                  )}
-                </div>
-              )}
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href={`/events/${featured?.slug?.current || featured?._id}`}
+                  className="inline-flex items-center gap-2 bg-white text-vmgef-ink hover:bg-vmgef-orange hover:text-white font-medium px-6 py-4 rounded-full transition-colors shadow-lg"
+                >
+                  <span>View Full Event Details</span>
+                  <ArrowRight size={18} />
+                </Link>
+
+                {(featured?.requiresRegistration || featured?.registrationUrl) && (
+                  <div>
+                    {featured.registrationType === 'external' && featured.registrationUrl ? (
+                      <a
+                        href={featured.registrationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 bg-vmgef-orange hover:bg-vmgef-orange-dark text-white font-medium px-8 py-4 rounded-full transition-colors shadow-lg"
+                      >
+                        <span>{featured.registrationButtonText || "Register for Event"}</span>
+                        <ExternalLink size={18} />
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => handleOpenRegistration(featured)}
+                        className="inline-flex items-center gap-3 bg-vmgef-orange hover:bg-vmgef-orange-dark text-white font-medium px-8 py-4 rounded-full transition-colors shadow-lg cursor-pointer"
+                      >
+                        <span>{featured.registrationButtonText || "Register / RSVP Now"}</span>
+                        <ArrowRight size={18} />
+                      </button>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* EVENT IMAGE & TICKET CARD */}
@@ -299,8 +310,8 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
                     {new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
                   </span>
                   <h3 className="font-serif text-2xl text-vmgef-ink mb-4">{event.title}</h3>
-                  <RichText value={event.description} className="text-vmgef-ink-light font-light mb-6 prose prose-vmgef prose-sm" />
-                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-vmgef-ink/10 mt-6">
+                  <RichText value={event.description} className="text-vmgef-ink-light font-light mb-6 prose prose-vmgef prose-sm line-clamp-3" />
+                  <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-vmgef-ink/10 mt-6">
                     <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
                       {event.location && event.location.toLowerCase().includes('online') ? (
                         <Ticket size={16} className="text-vmgef-orange" />
@@ -310,29 +321,39 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
                       {event.location}
                     </div>
 
-                    {(event.requiresRegistration || event.registrationUrl) && (
-                      <div>
-                        {event.registrationType === 'external' && event.registrationUrl ? (
-                          <a
-                            href={event.registrationUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-vmgef-orange hover:text-vmgef-orange-dark transition-colors"
-                          >
-                            <span>{event.registrationButtonText || "Register"}</span>
-                            <ExternalLink size={14} />
-                          </a>
-                        ) : (
-                          <button
-                            onClick={() => handleOpenRegistration(event)}
-                            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider bg-vmgef-orange text-white px-4 py-2 rounded-full hover:bg-vmgef-orange-dark transition-colors cursor-pointer"
-                          >
-                            <span>{event.registrationButtonText || "RSVP / Register"}</span>
-                            <ArrowRight size={14} />
-                          </button>
-                        )}
-                      </div>
-                    )}
+                    <div className="flex items-center gap-3">
+                      <Link
+                        href={`/events/${event.slug?.current || event._id}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-vmgef-ink hover:text-vmgef-orange transition-colors"
+                      >
+                        <span>Details</span>
+                        <ArrowRight size={14} />
+                      </Link>
+
+                      {(event.requiresRegistration || event.registrationUrl) && (
+                        <div>
+                          {event.registrationType === 'external' && event.registrationUrl ? (
+                            <a
+                              href={event.registrationUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-vmgef-orange hover:text-vmgef-orange-dark transition-colors"
+                            >
+                              <span>{event.registrationButtonText || "Register"}</span>
+                              <ExternalLink size={14} />
+                            </a>
+                          ) : (
+                            <button
+                              onClick={() => handleOpenRegistration(event)}
+                              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider bg-vmgef-orange text-white px-4 py-2 rounded-full hover:bg-vmgef-orange-dark transition-colors cursor-pointer"
+                            >
+                              <span>{event.registrationButtonText || "RSVP"}</span>
+                              <ArrowRight size={14} />
+                            </button>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                   </div>
                 </div>

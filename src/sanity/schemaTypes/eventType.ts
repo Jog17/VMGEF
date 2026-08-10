@@ -6,6 +6,13 @@ export const eventType = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string' }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
+      description: 'URL pathway for event details page'
+    }),
     defineField({ name: 'date', title: 'Date', type: 'datetime' }),
     defineField({ name: 'time', title: 'Time', type: 'string', description: 'e.g. 4:00 PM - 8:00 PM Prompt' }),
     defineField({ name: 'location', title: 'Location', type: 'string' }),
