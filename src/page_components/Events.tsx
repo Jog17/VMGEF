@@ -44,14 +44,36 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
     setIsSubmitted(false);
   };
 
-  const handleSubmitRegistration = (e: React.FormEvent) => {
+  const handleSubmitRegistration = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      await fetch("/api/register-event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          eventId: registeringEvent?._id,
+          eventTitle: registeringEvent?.title,
+          ticketType: "free",
+          quantity: parseInt(formData.guestsCount) || 1,
+          totalAmount: 0,
+          paymentMethod: "free",
+          paymentStatus: "free",
+          paymentReference: `RSVP-${Math.floor(100000 + Math.random() * 900000)}`,
+          notes: formData.notes
+        })
+      });
+    } catch (err) {
+      console.error("Failed to register attendee in Sanity Studio:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1000);
+    }
   };
+
 
   useGSAP(() => {
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });

@@ -59,6 +59,31 @@ export default function EventDetail({ event }: EventDetailProps) {
     setIsSuccess(false);
   };
 
+  const saveRegistrationToStudio = async (ref: string, status: string, method: string) => {
+    try {
+      await fetch('/api/register-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          eventId: event?._id,
+          eventTitle: event?.title,
+          ticketType: selectedTicketType,
+          quantity: ticketQuantity,
+          totalAmount: totalPrice,
+          paymentMethod: method,
+          paymentStatus: status,
+          paymentReference: ref,
+          notes: formData.notes
+        }),
+      });
+    } catch (err) {
+      console.error('Error recording attendee in Sanity Studio:', err);
+    }
+  };
+
   const handlePaystackPayment = () => {
     setIsProcessing(true);
     const reference = `VMGEF-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
@@ -74,7 +99,7 @@ export default function EventDetail({ event }: EventDetailProps) {
         ref: reference,
         metadata: {
           custom_fields: [
-            { display_name: "Event Title", variable_name: "event_title", value: event.title },
+            { display_name: "Event Title", variable_name: "event_title", value: event?.title },
             { display_name: "Full Name", variable_name: "full_name", value: formData.fullName },
             { display_name: "Phone Number", variable_name: "phone_number", value: formData.phone },
             { display_name: "Ticket Type", variable_name: "ticket_type", value: selectedTicketType.toUpperCase() },
@@ -82,8 +107,10 @@ export default function EventDetail({ event }: EventDetailProps) {
           ]
         },
         callback: function (response: any) {
+          const finalRef = response.reference || reference;
+          saveRegistrationToStudio(finalRef, "confirmed", "paystack");
           setIsProcessing(false);
-          setPaymentRef(response.reference || reference);
+          setPaymentRef(finalRef);
           setIsSuccess(true);
         },
         onClose: function () {
@@ -93,7 +120,8 @@ export default function EventDetail({ event }: EventDetailProps) {
       handler.openIframe();
     } else {
       // Direct registration confirmation fallback when Paystack test keys are not yet configured in production
-      setTimeout(() => {
+      setTimeout(async () => {
+        await saveRegistrationToStudio(reference, totalPrice > 0 ? "confirmed" : "free", totalPrice > 0 ? "paystack" : "free");
         setIsProcessing(false);
         setPaymentRef(reference);
         setIsSuccess(true);
@@ -101,19 +129,22 @@ export default function EventDetail({ event }: EventDetailProps) {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (paymentMethod === "paystack" && totalPrice > 0) {
       handlePaystackPayment();
     } else {
       setIsProcessing(true);
-      setTimeout(() => {
-        setIsProcessing(false);
-        setPaymentRef(`REG-${Date.now().toString().slice(-6)}`);
-        setIsSuccess(true);
-      }, 1000);
+      const ref = `REG-${Date.now().toString().slice(-6)}`;
+      const status = totalPrice === 0 ? "free" : "pending";
+      const method = totalPrice === 0 ? "free" : paymentMethod;
+      await saveRegistrationToStudio(ref, status, method);
+      setIsProcessing(false);
+      setPaymentRef(ref);
+      setIsSuccess(true);
     }
   };
+
 
   return (
     <main className="min-h-screen bg-vmgef-bg text-vmgef-ink pt-28 pb-20 px-6">

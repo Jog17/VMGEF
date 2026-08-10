@@ -19,6 +19,12 @@ export const eventType = defineType({
     defineField({ name: 'description', title: 'Description', type: 'array', of: [{ type: 'block' }] }),
     defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'isFeatured', title: 'Featured Event', type: 'boolean' }),
+    defineField({ 
+      name: 'isFreeEvent', 
+      title: 'Free Event (RSVP)', 
+      type: 'boolean',
+      description: 'Check if this is a free event (no fee required to attend)' 
+    }),
     defineField({
       name: 'schedule',
       title: 'Event Schedule',
