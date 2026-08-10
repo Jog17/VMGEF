@@ -145,7 +145,7 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
                 <Star size={14} /> {featured && featured.date && new Date(featured.date) > new Date() ? "Upcoming Event" : "Featured Event"}
               </div>
               <h2 className="font-serif text-5xl md:text-7xl mb-6">{featured ? featured.title : "2nd Annual Gala"}</h2>
-              <div className="text-2xl font-light text-white/80 mb-8 italic prose prose-invert prose-p:my-0 prose-p:inline">
+              <div className="text-2xl font-light text-white/80 mb-8 italic prose prose-invert prose-p:my-0 line-clamp-2 overflow-hidden">
                 <RichText value={featured?.description} fallback="Honoring Women Making an Impact in the Community" />
               </div>
               
@@ -310,7 +310,7 @@ export default function Events({ events, featuredEvents, eventsPageData }: Event
                     {new Date(event.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
                   </span>
                   <h3 className="font-serif text-2xl text-vmgef-ink mb-4">{event.title}</h3>
-                  <RichText value={event.description} className="text-vmgef-ink-light font-light mb-6 prose prose-vmgef prose-sm line-clamp-3" />
+                  <RichText value={event.description} className="text-vmgef-ink-light font-light mb-6 prose prose-vmgef prose-sm prose-p:my-0 line-clamp-2 overflow-hidden" />
                   <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-vmgef-ink/10 mt-6">
                     <div className="flex items-center gap-2 text-sm font-medium text-vmgef-ink">
                       {event.location && event.location.toLowerCase().includes('online') ? (

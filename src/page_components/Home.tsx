@@ -568,7 +568,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                           {event.isFeatured ? 'Featured' : 'Community'}
                         </span>
                         <h3 className="font-serif text-3xl md:text-4xl mb-2">{event.title}</h3>
-                        <RichText value={event.description} className={`font-light prose prose-sm ${index === 0 ? "text-white/80 prose-invert" : "text-vmgef-ink-light"}`} />
+                        <RichText value={event.description} className={`font-light prose prose-sm prose-p:my-0 line-clamp-2 overflow-hidden ${index === 0 ? "text-white/80 prose-invert" : "text-vmgef-ink-light"}`} />
                       </div>
                       <div className={`flex items-center justify-between border-t pt-6 mt-auto ${index === 0 ? 'border-white/20' : 'border-vmgef-ink/10'}`}>
                         <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">
