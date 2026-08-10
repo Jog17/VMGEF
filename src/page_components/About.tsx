@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { urlForImage } from "@/sanity/lib/image";
-import { PortableText } from "@portabletext/react";
+import { RichText } from "@/components/RichText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,21 +107,22 @@ export default function About({ teamMembers, aboutPageData }: AboutProps) {
               {aboutPageData?.history?.title || "The Catalyst"}
             </h2>
             <div className="space-y-6 text-lg text-vmgef-ink-light font-light leading-relaxed">
-              {aboutPageData?.history?.content ? (
-                <PortableText value={aboutPageData.history.content} />
-              ) : (
-                <>
-                  <p>
-                    The Vince Memorial Garden and Education Foundation (VMGEF) was formally incorporated in 2023. It was born from an unimaginable loss, but fueled by an unbreakable spirit.
-                  </p>
-                  <p>
-                    Jahzara Agyemang, a Ghanaian-American educator and former college professor, launched VMGEF in Accra as a tribute to her son, Vince. Recognizing the critical issue of youth unemployment in Ghana, Jahzara channeled her expertise in education into creating tangible, life-changing solutions.
-                  </p>
-                  <p>
-                    The organization began by piloting its flagship programs in 2024, including the first Girls' STEM camp and comprehensive entrepreneurship courses. Since then, the foundation has rapidly expanded its reach nationwide.
-                  </p>
-                </>
-              )}
+              <RichText 
+                value={aboutPageData?.history?.content}
+                fallback={
+                  <>
+                    <p>
+                      The Vince Memorial Garden and Education Foundation (VMGEF) was formally incorporated in 2023. It was born from an unimaginable loss, but fueled by an unbreakable spirit.
+                    </p>
+                    <p>
+                      Jahzara Agyemang, a Ghanaian-American educator and former college professor, launched VMGEF in Accra as a tribute to her son, Vince. Recognizing the critical issue of youth unemployment in Ghana, Jahzara channeled her expertise in education into creating tangible, life-changing solutions.
+                    </p>
+                    <p>
+                      The organization began by piloting its flagship programs in 2024, including the first Girls' STEM camp and comprehensive entrepreneurship courses. Since then, the foundation has rapidly expanded its reach nationwide.
+                    </p>
+                  </>
+                }
+              />
             </div>
           </div>
         </div>

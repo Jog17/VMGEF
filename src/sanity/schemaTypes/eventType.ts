@@ -32,6 +32,37 @@ export const eventType = defineType({
         defineField({ name: 'inquiriesPhone', title: 'Inquiries Phone', type: 'string' }),
         defineField({ name: 'inquiriesEmail', title: 'Inquiries Email', type: 'string' }),
       ]
+    }),
+    defineField({
+      name: 'requiresRegistration',
+      title: 'Requires Registration / RSVP',
+      type: 'boolean',
+      description: 'Enable registration form or link for this event'
+    }),
+    defineField({
+      name: 'registrationType',
+      title: 'Registration Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Interactive Form (Built-in Modal)', value: 'form' },
+          { title: 'External Link (Google Form / Eventbrite)', value: 'external' }
+        ],
+        layout: 'radio'
+      },
+      initialValue: 'form'
+    }),
+    defineField({
+      name: 'registrationUrl',
+      title: 'External Registration URL',
+      type: 'url',
+      description: 'Used if registration type is set to External Link'
+    }),
+    defineField({
+      name: 'registrationButtonText',
+      title: 'Registration Button Label',
+      type: 'string',
+      initialValue: 'Register for Event'
     })
   ],
 })

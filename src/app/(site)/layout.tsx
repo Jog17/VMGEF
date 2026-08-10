@@ -3,6 +3,9 @@ import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { getSiteSettings } from "@/sanity/lib/queries";
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function SiteLayout({
   children,
 }: {

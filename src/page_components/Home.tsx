@@ -6,7 +6,7 @@ import { ArrowRight, Heart, BookOpen, Stethoscope, GraduationCap, Leaf, Play } f
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { PortableText } from "@portabletext/react";
+import { RichText } from "@/components/RichText";
 import { urlForImage } from "@/sanity/lib/image";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -241,7 +241,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                       </div>
                       <span className={`${i % 2 === 0 ? 'text-vmgef-orange' : 'text-white/70'} text-xs font-bold tracking-widest uppercase mb-3 block`}>{subtitle}</span>
                       <h3 className="font-serif text-3xl mb-4 leading-tight whitespace-pre-line">{title}</h3>
-                      <p className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">{description}</p>
+                      <RichText value={description} className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200" />
                     </div>
                   </Link>
                 );
@@ -300,7 +300,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                     <div className="relative z-20">
                       <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-3 block">{displayInitiatives && displayInitiatives.length > 0 ? displayInitiatives[0].subtitle : "14-Week Course"}</span>
                       <h3 className="font-serif text-3xl md:text-4xl mb-4">{displayInitiatives && displayInitiatives.length > 0 ? displayInitiatives[0].title : "Building an Entrepreneur (BAE)"}</h3>
-                      <p className="text-white/80 font-light max-w-md">{displayInitiatives && displayInitiatives.length > 0 ? displayInitiatives[0].description : "Senior-high entrepreneurship course teaching business planning, culminating in a pitch competition with a GHS 10,000 grant."}</p>
+                      <RichText value={displayInitiatives && displayInitiatives.length > 0 ? displayInitiatives[0].description : "Senior-high entrepreneurship course teaching business planning, culminating in a pitch competition with a GHS 10,000 grant."} className="text-white/80 font-light max-w-md" />
                     </div>
                   </div>
 
@@ -312,7 +312,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                     <div>
                       <span className="text-vmgef-ink-light group-hover:text-white/80 tracking-widest uppercase text-xs font-bold mb-3 block transition-colors">{displayInitiatives && displayInitiatives.length > 1 ? displayInitiatives[1].subtitle : "8-Week Series"}</span>
                       <h3 className="font-serif text-2xl text-vmgef-ink group-hover:text-white mb-3 transition-colors">{displayInitiatives && displayInitiatives.length > 1 ? displayInitiatives[1].title : "Confident Girls, Bright Futures"}</h3>
-                      <p className="text-vmgef-ink-light group-hover:text-white/90 font-light text-sm transition-colors">{displayInitiatives && displayInitiatives.length > 1 ? displayInitiatives[1].description : "Junior-high empowerment covering self-confidence, integrity, and emotional growth."}</p>
+                      <RichText value={displayInitiatives && displayInitiatives.length > 1 ? displayInitiatives[1].description : "Junior-high empowerment covering self-confidence, integrity, and emotional growth."} className="text-vmgef-ink-light group-hover:text-white/90 font-light text-sm transition-colors" />
                     </div>
                   </div>
 
@@ -321,7 +321,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                     <Stethoscope size={32} className="text-vmgef-orange mb-6" />
                     <div>
                       <h3 className="font-serif text-xl text-vmgef-ink mb-3">{displayInitiatives && displayInitiatives.length > 2 ? displayInitiatives[2].title : "Healthcare Outreach"}</h3>
-                      <p className="text-vmgef-ink-light font-light text-sm">{displayInitiatives && displayInitiatives.length > 2 ? displayInitiatives[2].description : "Mpatase Clinic Equipment Drive. Outfitting a new 7-room rural clinic."}</p>
+                      <RichText value={displayInitiatives && displayInitiatives.length > 2 ? displayInitiatives[2].description : "Mpatase Clinic Equipment Drive. Outfitting a new 7-room rural clinic."} className="text-vmgef-ink-light font-light text-sm" />
                     </div>
                   </div>
 
@@ -330,7 +330,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                     <GraduationCap size={32} className="text-vmgef-orange mb-6" />
                     <div>
                       <h3 className="font-serif text-xl text-vmgef-ink mb-3">{displayInitiatives && displayInitiatives.length > 3 ? displayInitiatives[3].title : "STEM Scholarships"}</h3>
-                      <p className="text-vmgef-ink-light font-light text-sm">{displayInitiatives && displayInitiatives.length > 3 ? displayInitiatives[3].description : "4-year university scholarships for young women in science and tech."}</p>
+                      <RichText value={displayInitiatives && displayInitiatives.length > 3 ? displayInitiatives[3].description : "4-year university scholarships for young women in science and tech."} className="text-vmgef-ink-light font-light text-sm" />
                     </div>
                   </div>
 
@@ -339,7 +339,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                     <Leaf size={32} className="text-[#2D5A27] mb-6 relative z-10" />
                     <div className="relative z-10">
                       <h3 className="font-serif text-2xl text-vmgef-ink mb-3">{displayInitiatives && displayInitiatives.length > 4 ? displayInitiatives[4].title : "Urban Farming & Reforestation"}</h3>
-                      <p className="text-vmgef-ink-light font-light text-sm max-w-sm">{displayInitiatives && displayInitiatives.length > 4 ? displayInitiatives[4].description : "Teaching climate-smart agriculture and tree-planting through community classes."}</p>
+                      <RichText value={displayInitiatives && displayInitiatives.length > 4 ? displayInitiatives[4].description : "Teaching climate-smart agriculture and tree-planting through community classes."} className="text-vmgef-ink-light font-light text-sm max-w-sm" />
                     </div>
                     {/* Decorative leaf graphic */}
                     <Leaf size={200} className="absolute -bottom-10 -right-10 text-[#2D5A27]/10 transform -rotate-12 group-hover:rotate-0 transition-transform duration-700" />
@@ -434,20 +434,19 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                 {homePageData?.founderStory?.title || "Jahzara Agyemang, M.Ed."}
               </h2>
               <div className="space-y-6 text-lg text-vmgef-ink-light font-light leading-relaxed">
-                {homePageData?.founderStory?.description ? (
-                  homePageData.founderStory.description.map((p: string, i: number) => (
-                    <p key={i}>{p}</p>
-                  ))
-                ) : (
-                  <>
-                    <p>
-                      Also known as Obaa Yaa Papabi, Jahzara is a Philadelphia-raised, Ghana-based educator and entrepreneur. Having served as a professor and nonprofit director in the US and Ghana, her life's work is dedicated to leadership in education and women's empowerment.
-                    </p>
-                    <p>
-                      In 2023, she launched VMGEF in Accra as a profound tribute to her late son, Vince. The foundation serves as a direct response to youth unemployment, transforming grief into a powerful engine for community impact.
-                    </p>
-                  </>
-                )}
+                <RichText 
+                  value={homePageData?.founderStory?.description}
+                  fallback={
+                    <>
+                      <p>
+                        Also known as Obaa Yaa Papabi, Jahzara is a Philadelphia-raised, Ghana-based educator and entrepreneur. Having served as a professor and nonprofit director in the US and Ghana, her life's work is dedicated to leadership in education and women's empowerment.
+                      </p>
+                      <p>
+                        In 2023, she launched VMGEF in Accra as a profound tribute to her late son, Vince. The foundation serves as a direct response to youth unemployment, transforming grief into a powerful engine for community impact.
+                      </p>
+                    </>
+                  }
+                />
               </div>
               <div className="mt-12">
                 <Link href="/about" className="inline-flex items-center gap-3 bg-vmgef-ink text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-vmgef-orange transition-colors duration-300 rounded-full">
@@ -569,7 +568,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                           {event.isFeatured ? 'Featured' : 'Community'}
                         </span>
                         <h3 className="font-serif text-3xl md:text-4xl mb-2">{event.title}</h3>
-                        <div className={`font-light prose prose-sm ${index === 0 ? "text-white/80 prose-invert" : "text-vmgef-ink-light"}`}>{Array.isArray(event.description) ? <PortableText value={event.description} /> : event.description}</div>
+                        <RichText value={event.description} className={`font-light prose prose-sm ${index === 0 ? "text-white/80 prose-invert" : "text-vmgef-ink-light"}`} />
                       </div>
                       <div className={`flex items-center justify-between border-t pt-6 mt-auto ${index === 0 ? 'border-white/20' : 'border-vmgef-ink/10'}`}>
                         <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">

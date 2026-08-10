@@ -1,7 +1,8 @@
 import Home from "@/page_components/Home";
 import { getPrograms, getEvents, getFeaturedEvents, getTestimonials, getHomePage } from "@/sanity/lib/queries";
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function Page() {
   const programs = await getPrograms();

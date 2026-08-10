@@ -10,6 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import { urlForImage } from "@/sanity/lib/image";
+import { RichText } from "@/components/RichText";
 
 const fallbackPrograms = [
   {
@@ -197,9 +198,7 @@ export default function Programs({ programs, programsPageData }: ProgramsProps) 
                     <h2 className="prog-fade font-serif text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight">
                       {prog.title}
                     </h2>
-                    <p className="prog-fade text-lg md:text-xl opacity-80 font-light leading-relaxed mb-10">
-                      {prog.description}
-                    </p>
+                    <RichText value={prog.description} className="prog-fade text-lg md:text-xl opacity-80 font-light leading-relaxed mb-10" />
                     <div className="prog-fade">
                       <Link 
                         href="/donate" 

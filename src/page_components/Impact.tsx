@@ -9,6 +9,7 @@ import { MapPin, Users, GraduationCap, Heart, TreePine } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 import { urlForImage } from "@/sanity/lib/image";
+import { RichText } from "@/components/RichText";
 
 interface ImpactProps {
   impactPageData?: any;
@@ -239,7 +240,7 @@ export default function Impact({ impactPageData }: ImpactProps) {
                 <div className="absolute top-4 left-4 bg-white px-4 py-2 text-xs font-bold tracking-widest uppercase rounded-full">{project.category}</div>
               </div>
               <h3 className="font-serif text-2xl text-vmgef-ink mb-3">{project.title}</h3>
-              <p className="text-vmgef-ink-light font-light">{project.description}</p>
+              <RichText value={project.description} className="text-vmgef-ink-light font-light" />
             </div>
           ))}
         </div>
