@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Heart, BookOpen, Stethoscope, GraduationCap, Leaf, Play } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -141,21 +142,15 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
               <source src={homePageData.hero.backgroundVideoUrl} type="video/mp4" />
             </video>
           ) : homePageData?.hero?.backgroundImage ? (
-            <img 
+            <Image 
               src={urlForImage(homePageData.hero.backgroundImage)?.url() || ""} 
               alt="Hero Background" 
-              className="w-full h-full object-cover opacity-40 scale-105"
+              fill
+              className="object-cover opacity-40 scale-105"
+              referrerPolicy="no-referrer"
             />
           ) : (
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-              className="w-full h-full object-cover opacity-40 scale-105"
-            >
-              <source src="/vmgef_pics/VID-20250425-WA0008.mp4" type="video/mp4" />
-            </video>
+            <div className="w-full h-full bg-gradient-to-br from-vmgef-ink via-black to-vmgef-orange/20 opacity-50 scale-105" />
           )}
           <div className="absolute inset-0 bg-gradient-to-b from-vmgef-ink/60 via-vmgef-ink/40 to-vmgef-bg"></div>
         </div>
@@ -230,9 +225,23 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                 return (
                   <Link key={i} href={link} className="featured-card group relative h-[450px] md:h-[550px] overflow-hidden rounded-3xl bg-vmgef-ink text-white flex flex-col justify-end p-8 shadow-2xl">
                     {item.image ? (
-                      <img src={urlForImage(item.image)?.url() || ""} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+                      <Image 
+                        src={urlForImage(item.image)?.url() || ""} 
+                        alt={title || "Featured initiative"} 
+                        fill 
+                        className="object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" 
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : item.fallbackImage && !item.fallbackImage.startsWith('/vmgef_pics') ? (
+                      <Image 
+                        src={item.fallbackImage} 
+                        alt={title || "Featured initiative"} 
+                        fill 
+                        className="object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" 
+                        referrerPolicy="no-referrer"
+                      />
                     ) : (
-                      <img src={item.fallbackImage || "/vmgef_pics/IMG-20251127-WA0065.jpg"} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-40 transition-all duration-1000" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-vmgef-ink via-black to-vmgef-orange/20 opacity-60 group-hover:scale-110 transition-all duration-1000"></div>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                     <div className="relative z-10 transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
@@ -301,15 +310,25 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                 const isFeaturedLarge = idx === 0;
                 const isWide = idx % 5 === 1 || idx % 5 === 4;
 
+                const getImgUrl = (img: any) => {
+                  if (!img) return null;
+                  if (typeof img === 'string') return img;
+                  if (img.asset) return urlForImage(img)?.url() || null;
+                  return null;
+                };
+
+                const imgUrl = getImgUrl(item.image);
+
                 if (isFeaturedLarge) {
                   return (
                     <div key={item._id || idx} className="bento-item md:col-span-2 lg:col-span-2 row-span-2 bg-vmgef-ink text-white p-10 flex flex-col justify-between group overflow-hidden relative rounded-3xl">
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                      {item.image && (
-                        <img 
-                          src={urlForImage(item.image)?.url()} 
+                      {imgUrl && (
+                        <Image 
+                          src={imgUrl} 
                           alt={item.title || "Initiative"} 
-                          className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" 
+                          fill
+                          className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" 
                           referrerPolicy="no-referrer" 
                         />
                       )}
@@ -324,6 +343,34 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                         )}
                         <h3 className="font-serif text-3xl md:text-4xl mb-4">{item.title}</h3>
                         <RichText value={item.description} className="text-white/80 font-light max-w-md line-clamp-2 overflow-hidden prose-p:my-0" />
+                      </div>
+                    </div>
+                  );
+                }
+
+                if (imgUrl) {
+                  return (
+                    <div 
+                      key={item._id || idx} 
+                      className={`bento-item ${isWide ? 'md:col-span-1 lg:col-span-2' : 'md:col-span-1 lg:col-span-1'} bg-vmgef-ink text-white p-8 sm:p-10 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl relative overflow-hidden`}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/30 z-10"></div>
+                      <Image 
+                        src={imgUrl} 
+                        alt={item.title || "Initiative"} 
+                        fill
+                        className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" 
+                        referrerPolicy="no-referrer" 
+                      />
+                      <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-6 shadow-sm relative z-20">
+                        <IconComponent size={24} className="text-vmgef-orange" />
+                      </div>
+                      <div className="relative z-20">
+                        {item.subtitle && (
+                          <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-3 block">{item.subtitle}</span>
+                        )}
+                        <h3 className="font-serif text-2xl text-white mb-3">{item.title}</h3>
+                        <RichText value={item.description} className="text-white/80 font-light text-sm line-clamp-2 overflow-hidden prose-p:my-0 prose-invert" />
                       </div>
                     </div>
                   );
@@ -383,18 +430,15 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
               <>
                 {/* Placeholder for actual video thumbnail */}
                 {homePageData?.videoSection?.thumbnail ? (
-                  <img 
+                  <Image 
                     src={urlForImage(homePageData.videoSection.thumbnail)?.url() || ""} 
                     alt="Video Thumbnail" 
-                    className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
-                  />
-                ) : (
-                  <img 
-                    src="/vmgef_pics/IMG-20251127-WA0068.jpg" 
-                    alt="Video Thumbnail" 
-                    className="parallax-bg absolute -top-[20%] left-0 w-full h-[140%] object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
+                    fill
+                    className="parallax-bg object-cover opacity-60 group-hover:scale-105 group-hover:opacity-40 transition-all duration-700"
                     referrerPolicy="no-referrer"
                   />
+                ) : (
+                  <div className="parallax-bg absolute inset-0 bg-gradient-to-br from-vmgef-ink via-black to-vmgef-orange/20 opacity-60 group-hover:scale-105 transition-all duration-700" />
                 )}
                 <div className="absolute inset-0 flex items-center justify-center z-10">
                   <div className="w-24 h-24 bg-vmgef-orange rounded-full flex items-center justify-center pl-2 shadow-[0_0_40px_rgba(255,99,33,0.4)] group-hover:scale-110 transition-transform duration-500">
@@ -413,18 +457,15 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="parallax-container h-[600px] overflow-hidden relative rounded-3xl">
               {homePageData?.founderStory?.image ? (
-                <img 
+                <Image 
                   src={urlForImage(homePageData.founderStory.image)?.url() || ""} 
                   alt={homePageData?.founderStory?.title || "Jahzara Agyemang"} 
-                  className="parallax-img absolute -top-[20%] left-0 w-full h-[140%] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                />
-              ) : (
-                <img 
-                  src="/vmgef_pics/jahzara.jpg" 
-                  alt="Jahzara Agyemang" 
-                  className="parallax-img absolute -top-[20%] left-0 w-full h-[140%] object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                  fill
+                  className="parallax-img object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                   referrerPolicy="no-referrer"
                 />
+              ) : (
+                <div className="parallax-img absolute inset-0 bg-gradient-to-tr from-vmgef-ink via-vmgef-ink/80 to-vmgef-orange/30 grayscale hover:grayscale-0 transition-all duration-1000 flex items-center justify-center p-8 text-white/50 font-serif text-2xl" />
               )}
             </div>
             <div className="fade-up flex flex-col justify-center">
@@ -552,30 +593,33 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {upcomingEvents.map((event: any, index: number) => (
                   <div key={event._id || index} className={`fade-up group relative overflow-hidden rounded-3xl text-white ${index === 0 ? 'bg-vmgef-ink' : 'bg-[#F4F1ED] text-vmgef-ink border border-vmgef-ink/10'}`}>
-                    {index === 0 && (
+                    {event.image ? (
                       <div className="absolute inset-0 z-0">
-                        <img 
-                          src="/vmgef_pics/IMG-20251002-WA0052.jpg" 
-                          alt="Featured Event" 
-                          className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
+                        <Image 
+                          src={urlForImage(event.image)?.url() || ""} 
+                          alt={event.title || "Featured Event"} 
+                          fill
+                          className="object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
                           referrerPolicy="no-referrer"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-vmgef-ink via-vmgef-ink/80 to-transparent"></div>
                       </div>
-                    )}
-                    <div className={`relative z-10 p-10 h-full flex flex-col min-h-[400px] ${index === 0 ? 'justify-end' : ''}`}>
+                    ) : index === 0 ? (
+                      <div className="absolute inset-0 z-0 bg-gradient-to-br from-vmgef-ink via-black to-vmgef-orange/20 opacity-80" />
+                    ) : null}
+                    <div className={`relative z-10 p-10 h-full flex flex-col min-h-[400px] ${index === 0 || event.image ? 'justify-end' : ''}`}>
                       <div className="mb-6">
-                        <span className={`inline-block text-xs font-bold tracking-widest uppercase px-4 py-2 mb-4 rounded-full ${index === 0 ? 'bg-vmgef-orange text-white' : 'border border-vmgef-ink/20 text-vmgef-ink-light'}`}>
+                        <span className={`inline-block text-xs font-bold tracking-widest uppercase px-4 py-2 mb-4 rounded-full ${index === 0 || event.image ? 'bg-vmgef-orange text-white' : 'border border-vmgef-ink/20 text-vmgef-ink-light'}`}>
                           {event.isFeatured ? 'Featured' : 'Community'}
                         </span>
                         <h3 className="font-serif text-3xl md:text-4xl mb-2">{event.title}</h3>
-                        <RichText value={event.description} className={`font-light prose prose-sm prose-p:my-0 line-clamp-2 overflow-hidden ${index === 0 ? "text-white/80 prose-invert" : "text-vmgef-ink-light"}`} />
+                        <RichText value={event.description} className={`font-light prose prose-sm prose-p:my-0 line-clamp-2 overflow-hidden ${index === 0 || event.image ? "text-white/80 prose-invert" : "text-vmgef-ink-light"}`} />
                       </div>
-                      <div className={`flex items-center justify-between border-t pt-6 mt-auto ${index === 0 ? 'border-white/20' : 'border-vmgef-ink/10'}`}>
+                      <div className={`flex items-center justify-between border-t pt-6 mt-auto ${index === 0 || event.image ? 'border-white/20' : 'border-vmgef-ink/10'}`}>
                         <div className="text-sm tracking-widest uppercase font-semibold text-vmgef-orange">
                           {new Date(event.date).toLocaleDateString()}
                         </div>
-                        <Link href={`/events/${event.slug?.current || event._id}`} className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${index === 0 ? 'border-white/30 group-hover:bg-vmgef-orange group-hover:border-vmgef-orange' : 'border-vmgef-ink/20 group-hover:bg-vmgef-ink group-hover:text-white'}`}>
+                        <Link href={`/events/${event.slug?.current || event._id}`} className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${index === 0 || event.image ? 'border-white/30 group-hover:bg-vmgef-orange group-hover:border-vmgef-orange' : 'border-vmgef-ink/20 group-hover:bg-vmgef-ink group-hover:text-white'}`}>
                           <ArrowRight size={18} />
                         </Link>
                       </div>
@@ -606,8 +650,20 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
               "{testimonials && testimonials.length > 0 ? testimonials[0].quote : "The BAE program didn't just teach me how to write a business plan; it taught me that my ideas have value. I now have the confidence to pursue my dreams and create jobs in my community."}"
             </p>
             <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-vmgef-ink/10 overflow-hidden">
-                <img src="/vmgef_pics/IMG-20251002-WA0040.jpg" alt="Student" className="w-full h-full object-cover grayscale" referrerPolicy="no-referrer" />
+              <div className="w-12 h-12 rounded-full bg-vmgef-ink/10 overflow-hidden relative">
+                {testimonials && testimonials.length > 0 && testimonials[0].image ? (
+                  <Image 
+                    src={urlForImage(testimonials[0].image)?.url() || ""} 
+                    alt={testimonials[0].author || "Student"} 
+                    fill 
+                    className="object-cover grayscale" 
+                    referrerPolicy="no-referrer" 
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-vmgef-orange text-white font-bold text-base">
+                    {(testimonials && testimonials.length > 0 && testimonials[0].author ? testimonials[0].author[0] : "A")}
+                  </div>
+                )}
               </div>
               <div className="text-left">
                 <div className="font-bold text-vmgef-ink text-sm uppercase tracking-widest">{testimonials && testimonials.length > 0 ? testimonials[0].author : "Ama Mensah"}</div>
