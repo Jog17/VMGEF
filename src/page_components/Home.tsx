@@ -241,7 +241,7 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
                       </div>
                       <span className={`${i % 2 === 0 ? 'text-vmgef-orange' : 'text-white/70'} text-xs font-bold tracking-widest uppercase mb-3 block`}>{subtitle}</span>
                       <h3 className="font-serif text-3xl mb-4 leading-tight whitespace-pre-line">{title}</h3>
-                      <RichText value={description} className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200" />
+                      <RichText value={description} className="text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200 line-clamp-2 overflow-hidden prose-p:my-0" />
                     </div>
                   </Link>
                 );
@@ -285,67 +285,68 @@ export default function Home({ programs, events = [], featuredEvents, testimonia
               const displayInitiatives = homePageData?.featuredInitiatives?.length > 0 
                 ? homePageData.featuredInitiatives 
                 : programs;
-                
-              return (
-                <>
-                  {/* BAE - Large Feature */}
-                  <div className="bento-item md:col-span-2 lg:col-span-2 row-span-2 bg-vmgef-ink text-white p-10 flex flex-col justify-between group overflow-hidden relative rounded-3xl">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                    <img src={displayInitiatives && displayInitiatives.length > 0 && displayInitiatives[0].image ? urlForImage(displayInitiatives[0].image)?.url() : "/vmgef_pics/IMG-20251002-WA0039.jpg"} alt="Entrepreneurship" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" referrerPolicy="no-referrer" />
-                    <div className="relative z-20">
-                      <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6">
-                        <BookOpen size={24} className="text-white" />
+
+              if (!displayInitiatives || displayInitiatives.length === 0) {
+                return (
+                  <div className="col-span-full py-12 text-center text-vmgef-ink-light">
+                    <p>No initiatives published yet. Add initiatives in Sanity Studio.</p>
+                  </div>
+                );
+              }
+
+              const icons = [BookOpen, Heart, Stethoscope, GraduationCap, Leaf];
+
+              return displayInitiatives.map((item: any, idx: number) => {
+                const IconComponent = icons[idx % icons.length];
+                const isFeaturedLarge = idx === 0;
+                const isWide = idx % 5 === 1 || idx % 5 === 4;
+
+                if (isFeaturedLarge) {
+                  return (
+                    <div key={item._id || idx} className="bento-item md:col-span-2 lg:col-span-2 row-span-2 bg-vmgef-ink text-white p-10 flex flex-col justify-between group overflow-hidden relative rounded-3xl">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                      {item.image && (
+                        <img 
+                          src={urlForImage(item.image)?.url()} 
+                          alt={item.title || "Initiative"} 
+                          className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700" 
+                          referrerPolicy="no-referrer" 
+                        />
+                      )}
+                      <div className="relative z-20">
+                        <div className="w-12 h-12 bg-vmgef-orange rounded-full flex items-center justify-center mb-6">
+                          <IconComponent size={24} className="text-white" />
+                        </div>
+                      </div>
+                      <div className="relative z-20">
+                        {item.subtitle && (
+                          <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-3 block">{item.subtitle}</span>
+                        )}
+                        <h3 className="font-serif text-3xl md:text-4xl mb-4">{item.title}</h3>
+                        <RichText value={item.description} className="text-white/80 font-light max-w-md line-clamp-2 overflow-hidden prose-p:my-0" />
                       </div>
                     </div>
-                    <div className="relative z-20">
-                      <span className="text-vmgef-orange tracking-widest uppercase text-xs font-bold mb-3 block">{displayInitiatives && displayInitiatives.length > 0 ? displayInitiatives[0].subtitle : "14-Week Course"}</span>
-                      <h3 className="font-serif text-3xl md:text-4xl mb-4">{displayInitiatives && displayInitiatives.length > 0 ? displayInitiatives[0].title : "Building an Entrepreneur (BAE)"}</h3>
-                      <RichText value={displayInitiatives && displayInitiatives.length > 0 ? displayInitiatives[0].description : "Senior-high entrepreneurship course teaching business planning, culminating in a pitch competition with a GHS 10,000 grant."} className="text-white/80 font-light max-w-md" />
-                    </div>
-                  </div>
+                  );
+                }
 
-                  {/* Confident Girls */}
-                  <div className={`bento-item md:col-span-1 lg:col-span-2 ${displayInitiatives && displayInitiatives.length > 1 && displayInitiatives[1].color ? displayInitiatives[1].color : "bg-[#F4F1ED]"} p-10 flex flex-col justify-between group hover:bg-vmgef-orange transition-colors duration-500 rounded-3xl`}>
-                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm">
-                      <Heart size={24} className="text-vmgef-orange" />
+                return (
+                  <div 
+                    key={item._id || idx} 
+                    className={`bento-item ${isWide ? 'md:col-span-1 lg:col-span-2' : 'md:col-span-1 lg:col-span-1'} ${item.color || (idx % 2 === 0 ? "bg-[#F4F1ED]" : "bg-white border border-gray-200")} p-8 sm:p-10 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl relative overflow-hidden`}
+                  >
+                    <div className="w-12 h-12 bg-white/80 rounded-full flex items-center justify-center mb-6 shadow-sm relative z-10">
+                      <IconComponent size={24} className="text-vmgef-orange" />
                     </div>
-                    <div>
-                      <span className="text-vmgef-ink-light group-hover:text-white/80 tracking-widest uppercase text-xs font-bold mb-3 block transition-colors">{displayInitiatives && displayInitiatives.length > 1 ? displayInitiatives[1].subtitle : "8-Week Series"}</span>
-                      <h3 className="font-serif text-2xl text-vmgef-ink group-hover:text-white mb-3 transition-colors">{displayInitiatives && displayInitiatives.length > 1 ? displayInitiatives[1].title : "Confident Girls, Bright Futures"}</h3>
-                      <RichText value={displayInitiatives && displayInitiatives.length > 1 ? displayInitiatives[1].description : "Junior-high empowerment covering self-confidence, integrity, and emotional growth."} className="text-vmgef-ink-light group-hover:text-white/90 font-light text-sm transition-colors" />
-                    </div>
-                  </div>
-
-                  {/* Healthcare */}
-                  <div className={`bento-item md:col-span-1 lg:col-span-1 ${displayInitiatives && displayInitiatives.length > 2 && displayInitiatives[2].color ? displayInitiatives[2].color : "bg-white"} border border-gray-200 p-8 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl`}>
-                    <Stethoscope size={32} className="text-vmgef-orange mb-6" />
-                    <div>
-                      <h3 className="font-serif text-xl text-vmgef-ink mb-3">{displayInitiatives && displayInitiatives.length > 2 ? displayInitiatives[2].title : "Healthcare Outreach"}</h3>
-                      <RichText value={displayInitiatives && displayInitiatives.length > 2 ? displayInitiatives[2].description : "Mpatase Clinic Equipment Drive. Outfitting a new 7-room rural clinic."} className="text-vmgef-ink-light font-light text-sm" />
-                    </div>
-                  </div>
-
-                  {/* STEM */}
-                  <div className={`bento-item md:col-span-1 lg:col-span-1 ${displayInitiatives && displayInitiatives.length > 3 && displayInitiatives[3].color ? displayInitiatives[3].color : "bg-white"} border border-gray-200 p-8 flex flex-col justify-between group hover:border-vmgef-orange transition-colors duration-500 rounded-3xl`}>
-                    <GraduationCap size={32} className="text-vmgef-orange mb-6" />
-                    <div>
-                      <h3 className="font-serif text-xl text-vmgef-ink mb-3">{displayInitiatives && displayInitiatives.length > 3 ? displayInitiatives[3].title : "STEM Scholarships"}</h3>
-                      <RichText value={displayInitiatives && displayInitiatives.length > 3 ? displayInitiatives[3].description : "4-year university scholarships for young women in science and tech."} className="text-vmgef-ink-light font-light text-sm" />
-                    </div>
-                  </div>
-
-                  {/* Urban Farming */}
-                  <div className={`bento-item md:col-span-1 lg:col-span-2 ${displayInitiatives && displayInitiatives.length > 4 && displayInitiatives[4].color ? displayInitiatives[4].color : "bg-[#E8EFE9]"} p-10 flex flex-col justify-between group relative overflow-hidden rounded-3xl`}>
-                    <Leaf size={32} className="text-[#2D5A27] mb-6 relative z-10" />
                     <div className="relative z-10">
-                      <h3 className="font-serif text-2xl text-vmgef-ink mb-3">{displayInitiatives && displayInitiatives.length > 4 ? displayInitiatives[4].title : "Urban Farming & Reforestation"}</h3>
-                      <RichText value={displayInitiatives && displayInitiatives.length > 4 ? displayInitiatives[4].description : "Teaching climate-smart agriculture and tree-planting through community classes."} className="text-vmgef-ink-light font-light text-sm max-w-sm" />
+                      {item.subtitle && (
+                        <span className="text-vmgef-ink-light tracking-widest uppercase text-xs font-bold mb-3 block">{item.subtitle}</span>
+                      )}
+                      <h3 className="font-serif text-2xl text-vmgef-ink mb-3">{item.title}</h3>
+                      <RichText value={item.description} className="text-vmgef-ink-light font-light text-sm line-clamp-2 overflow-hidden prose-p:my-0" />
                     </div>
-                    {/* Decorative leaf graphic */}
-                    <Leaf size={200} className="absolute -bottom-10 -right-10 text-[#2D5A27]/10 transform -rotate-12 group-hover:rotate-0 transition-transform duration-700" />
                   </div>
-                </>
-              );
+                );
+              });
             })()}
           </div>
         </div>

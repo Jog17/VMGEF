@@ -49,7 +49,7 @@ export const donatePageType = defineType({
             defineField({ name: 'description', title: 'Description', type: 'text' }),
             defineField({ name: 'buttonText', title: 'Button Text', type: 'string' }),
             defineField({ name: 'buttonLink', title: 'Button Link', type: 'url' }),
-            defineField({ name: 'donorboxUrl', title: 'Donorbox Embed URL (Optional)', type: 'url', description: 'If provided, a Donorbox widget will be embedded directly on the page instead of just a link. E.g. https://donorbox.org/embed/vmgef' }),
+            defineField({ name: 'donorboxUrl', title: 'Donorbox Link / Page URL', type: 'url', description: 'The Donorbox URL where visitors will be redirected to make their donation (e.g. https://donorbox.org/vmgef)' }),
           ],
         }),
       ],

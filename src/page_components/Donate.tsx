@@ -4,7 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { CreditCard, Smartphone, HeartHandshake, Mail, Phone, MapPin } from "lucide-react";
+import { CreditCard, Smartphone, HeartHandshake, Mail, Phone, MapPin, ExternalLink, ShieldCheck } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -128,19 +128,28 @@ export default function Donate({ donatePageData }: DonateProps) {
                   <CreditCard size={28} className="text-white" />
                 </div>
                 <div className="flex-1 w-full">
-                  <h3 className="font-serif text-2xl mb-2">{donatePageData?.donationOptions?.online?.title || "Online Donation"}</h3>
-                  <p className="text-white/70 font-light mb-8">{donatePageData?.donationOptions?.online?.description || "Securely donate from anywhere in the world using your credit or debit card."}</p>
+                  <h3 className="font-serif text-2xl mb-2">{donatePageData?.donationOptions?.online?.title || "Online Donation via Donorbox"}</h3>
+                  <p className="text-white/70 font-light mb-8">{donatePageData?.donationOptions?.online?.description || "Securely donate from anywhere in the world using your credit card, debit card, or PayPal via our Donorbox page."}</p>
                   
-                  <div className="w-full bg-white rounded-xl overflow-hidden min-h-[400px]">
-                    <iframe 
-                      src={donatePageData?.donationOptions?.online?.donorboxUrl || "https://donorbox.org/embed/5k-walk-run-for-confident-girls-bright-futures-tanzania-school-tour"} 
-                      name="donorbox" 
-                      allow="payment"
-                      frameBorder="0" 
-                      scrolling="no" 
-                      className="w-full h-[600px] md:h-[900px]"
-                      style={{ maxWidth: '100%', minWidth: '250px', maxHeight: 'none' }}
-                    ></iframe>
+                  <div className="bg-white/5 border border-white/10 p-6 rounded-2xl space-y-4">
+                    <div className="flex items-center gap-3 text-sm text-white/80">
+                      <ShieldCheck size={20} className="text-vmgef-orange shrink-0" />
+                      <span>Encrypted & 100% secure processing through Donorbox</span>
+                    </div>
+
+                    <a
+                      href={
+                        donatePageData?.donationOptions?.online?.donorboxUrl || 
+                        donatePageData?.donationOptions?.online?.buttonLink || 
+                        "https://donorbox.org/5k-walk-run-for-confident-girls-bright-futures-tanzania-school-tour"
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-3 bg-vmgef-orange hover:bg-vmgef-orange-dark text-white font-medium px-8 py-4 rounded-full transition-all shadow-lg text-base w-full sm:w-auto cursor-pointer"
+                    >
+                      <span>{donatePageData?.donationOptions?.online?.buttonText || "Donate on Donorbox"}</span>
+                      <ExternalLink size={18} />
+                    </a>
                   </div>
                 </div>
               </div>
